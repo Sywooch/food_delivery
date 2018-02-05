@@ -11,7 +11,26 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'admin' => [
+            'class' => 'mdm\admin\Module',
+            'layout' => 'left-menu',
+            'controllerMap' => [
+                'assignment' => [
+                    'class' => 'mdm\admin\controllers\AssignmentController',
+                    'idField' => 'id',
+                    'usernameField' => 'username',
+                ],
+            ],
+        ],
+    ],
+    'as access' => [
+        'class' => 'mdm\admin\components\AccessControl',
+        'allowActions' => [
+            'site/*',
+            'admin/*'
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
