@@ -10,6 +10,7 @@ return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
+    'language' => 'ru-RU',
     'bootstrap' => ['log'],
     'modules' => [
         'admin' => [
@@ -66,7 +67,8 @@ return [
             'rules' => [
                 '' => '/site/index',
                 'login' => '/site/login',
-                'logout' => '/site/logout'
+                'logout' => '/site/logout',
+                'staff' => '/staff/index'
             ],
         ],
         'assetManager' => [

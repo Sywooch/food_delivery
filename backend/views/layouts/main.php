@@ -1,14 +1,14 @@
 <?php
 
-/* @var $this \yii\web\View */
-/* @var $content string */
-
 use backend\assets\AppAsset;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
+use common\models\Profile;
+
+$profile = Profile::findOne(['user_id' => Yii::$app->user->getId()]);
 
 AppAsset::register($this);
 ?>
@@ -120,8 +120,7 @@ AppAsset::register($this);
         </ul>
 
         <div class="navbar-right">
-            <p class="navbar-text">Morning, Victoria!</p>
-            <p class="navbar-text"><span class="label bg-success">Online</span></p>
+            <p class="navbar-text">Здравствуйте, <?= isset($profile) ? $profile->name : 'Пользователь' ?>!</p>
 
             <ul class="nav navbar-nav">
                 <li class="dropdown">
@@ -310,11 +309,14 @@ AppAsset::register($this);
     <div class="page-content">
 
         <div class="sidebar sidebar-main">
-            <?= $this->render('_menu') ?>
+            <?= $this->render('_menu', [
+                'profile' => $profile
+            ]) ?>
         </div>
 
         <div class="content-wrapper">
             <div class="content">
+                <?= Alert::widget() ?>
                 <?= $content ?>
             </div>
         </div>
