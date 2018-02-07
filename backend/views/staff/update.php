@@ -24,7 +24,7 @@ $this->title = 'Редактирование пользователя';
 
                     <legend class="text-semibold"><i class="icon-reading position-left"></i> Аккаунт</legend>
 
-                    <?= $form->field($user, 'username')->textInput(['class' => 'form-control', 'placeholder' => 'Будет сгенерирован автоматически']) ?>
+                    <?= $form->field($user, 'username')->textInput(['class' => 'form-control', 'placeholder' => 'Будет сгенерирован автоматически'])->label('Логин')  ?>
 
                     <div class="form-group">
                         <label class="display-block">Роль:</label>

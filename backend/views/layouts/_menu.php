@@ -48,7 +48,8 @@ use yii\helpers\Html;
                 <!-- Main -->
                 <li class="navigation-header"><span>Меню</span> <i class="icon-menu" title="Main pages"></i></li>
                 <li class="active"><a href="<?= Url::to(['/site/index']) ?>"><i class="icon-home4"></i> <span>Главная</span></a></li>
-                <li><a href="<?= Url::to(['/staff/index']) ?>"><i class="icon-users4"></i> <span>Персонал</span></a></li>
+                <li><a href="<?= Url::to(['/staff/index']) ?>"><i class="icon-users2"></i> <span>Персонал</span></a></li>
+                <li><a href="<?= Url::to(['/category/index']) ?>"><i class="icon-price-tag2"></i> <span>Категории</span></a></li>
                 <li>
                     <a href="#"><i class="icon-stack2"></i> <span>Page layouts</span></a>
                     <ul>

@@ -42,7 +42,7 @@ class RegisterStaff extends Model
             [['name', 'surname'], 'required'],
             [['name', 'surname'], 'string', 'max' => 255],
 
-            ['photo', 'file'],
+            [['photo'], 'file', 'extensions' => 'png, jpg, jpeg'],
             
             ['role', 'string']
         ];
