@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Url;
+use yii\helpers\Html;
 ?>
 
 <div class="sidebar-content">
@@ -24,7 +25,15 @@ use yii\helpers\Url;
                 <li><a href="#"><i class="icon-comment-discussion"></i> <span><span class="badge bg-teal-400 pull-right">58</span> Messages</span></a></li>
                 <li class="divider"></li>
                 <li><a href="#"><i class="icon-cog5"></i> <span>Account settings</span></a></li>
-                <li><a href="#"><i class="icon-switch2"></i> <span>Logout</span></a></li>
+                <li>
+                    <?= Html::a('<i class="icon-switch2"></i> <span>Выход</span>',
+                    ['/site/logout'],
+                    [
+                        'data' => [
+                            'method' => 'post'
+                        ]
+                    ]) ?>
+                </li>
             </ul>
         </div>
     </div>
@@ -38,7 +47,7 @@ use yii\helpers\Url;
 
                 <!-- Main -->
                 <li class="navigation-header"><span>Меню</span> <i class="icon-menu" title="Main pages"></i></li>
-                <li class="active"><a href="<?= Url::to(['']) ?>"><i class="icon-home4"></i> <span>Главная</span></a></li>
+                <li class="active"><a href="<?= Url::to(['/site/index']) ?>"><i class="icon-home4"></i> <span>Главная</span></a></li>
                 <li><a href="<?= Url::to(['/staff/index']) ?>"><i class="icon-users4"></i> <span>Персонал</span></a></li>
                 <li>
                     <a href="#"><i class="icon-stack2"></i> <span>Page layouts</span></a>

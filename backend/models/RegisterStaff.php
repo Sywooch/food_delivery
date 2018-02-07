@@ -4,6 +4,9 @@ namespace backend\models;
 
 use Yii;
 use yii\base\Model;
+use common\models\User;
+use common\models\Profile;
+use backend\models\AuthAssignment;
 
 class RegisterStaff extends Model
 {
@@ -22,7 +25,7 @@ class RegisterStaff extends Model
     {
         return [
             ['username', 'trim'],
-            ['username', 'required'],
+//            ['username', 'required'],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Такой никнейм уже зарегистрирован.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
@@ -32,7 +35,7 @@ class RegisterStaff extends Model
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Такой email уже зарегистрирован.'],
 
-            ['password', 'required'],
+//            ['password', 'required'],
             ['password', 'string', 'min' => 6],
 
             [['name', 'surname'], 'trim'],
@@ -57,5 +60,46 @@ class RegisterStaff extends Model
             'role' => 'Роль'
         ];
     }
+
+    public function RegisterStaff($request, $photo)
+    {
+        $user = new User();
+        $profile = new Profile();
+        $auth_assignment = new AuthAssignment();
+
+        $user->username = !empty($request['username']) ? $request['username'] : $request['name'].'_'.uniqid();
+        $user->password_hash = !empty($request['password']) ? $request['password'] : uniqid();
+        $user->password_hash = Yii::$app->security->generatePasswordHash(password_hash);
+        $user->email = $request['email'];
+        $user->generateAuthKey();
+
+        if($user->save()){
+            $auth_assignment->item_name = $request['role'];
+            $auth_assignment->user_id = $user->id;
+            $auth_assignment->created_at = Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));
+
+            if($auth_assignment->save()){
+                $profile->name = $request['name'];
+                $profile->surname = $request['surname'];
+                $profile->user_id = $user->id;
+
+                if($profile->save()){
+                    if($photo) {
+                        $imageName = uniqid();
+                        $photo->saveAs('storage/user_avatars/'.$imageName.'.'.$photo->extension);
+                        $profile->avatar = '/backend/web/storage/user_avatars/'.$imageName.'.'.$photo->extension;
+                        $profile->save(false);
+                    }
+
+                    return true;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    
 
 }

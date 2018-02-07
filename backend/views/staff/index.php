@@ -70,8 +70,26 @@ $this->title = 'Персонал';
                 if(Yii::$app->user->identity->getId() == $model->id) {
                     return '';
                 } else {
-                    return Html::a('<span class="icon-pencil6"></span>', ['update', 'id' => $model->id], ['title' => 'Отредактировать']).' '.
-                           Html::a('<span class=" icon-trash"></span>', ['delete', 'id' => $model->id], ['title' => 'Удалить']);
+                    return $model->status == 10 ?
+                        Html::a('<span class="icon-pencil6"></span>', ['update', 'id' => $model->id], ['title' => 'Отредактировать']).' '.
+                        Html::a('<span class="icon-trash"></span>', ['delete', 'id' => $model->id],
+                               [
+                                   'title' => 'Удалить',
+                                   'data' => [
+                                       'method' => 'post',
+                                       'confirm' => 'Вы уверены что хотите удалить пользователя?'
+                                   ]
+                               ])
+                        :
+                        Html::a('<span class="icon-pencil6"></span>', ['update', 'id' => $model->id], ['title' => 'Отредактировать']).' '.
+                        Html::a('<span class="icon-clipboard5"></span>', ['activate', 'id' => $model->id],
+                            [
+                                'title' => 'Восстановить',
+                                'data' => [
+                                    'method' => 'post',
+                                    'confirm' => 'Вы уверены что хотите восстановить пользователя?'
+                                ]
+                            ]);
                 }
             }
         ]
