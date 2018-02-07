@@ -1,9 +1,10 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use dosamigos\ckeditor\CKEditor;
 ?>
 
-<div class="col-md-6">
+<div class="col-md-9">
     <?php $form = ActiveForm::begin(['id' => 'category-form']); ?>
         <div class="panel panel-flat">
             <div class="panel-heading">
@@ -29,7 +30,9 @@ use yii\bootstrap\ActiveForm;
 
                         <?= $form->field($model, 'name')->textInput(['class' => 'form-control', 'placeholder' => 'Название категории']) ?>
 
-                        <?= $form->field($model, 'description')->textarea(['class' => 'form-control', 'rows' => 5, 'cols' => 5, 'placeholder' => 'Описание категории']) ?>
+                        <?= $form->field($model, 'description')->widget(CKEditor::className(), [
+                            'preset' => 'full'
+                        ]) ?>
 
                         <?php if($model->isNewRecord): ?>
                             <div class="form-group">

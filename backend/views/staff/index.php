@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
+use yii\widgets\ActiveForm;
 
 $this->title = 'Персонал';
 
@@ -14,6 +15,15 @@ $this->title = 'Персонал';
     </button>
 ', ['create']) ?>
 
+<?php $form = ActiveForm::begin(['options' => ['data-pjax' => true ], 'method' => 'get', 'action' => ['index']]); ?>
+    <div class="form-group has-feedback has-feedback-left" style="max-width: 300px; float: right">
+        <input class="form-control ui-autocomplete-input" name="UserSearch[search]" placeholder="Поиск" id="ac-basic" autocomplete="off" type="text">
+        <div class="form-control-feedback">
+            <i class="icon-search4 text-size-base"></i>
+        </div>
+    </div>
+<?php ActiveForm::end() ?>
+
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'columns' => [
@@ -24,7 +34,8 @@ $this->title = 'Персонал';
                 return Html::img($model->profile->avatar, [
                     'alt' => 'profile_image',
                     'style' => [
-                        'height' => '50px'
+                        'height' => '50px',
+                        'width' => '80px'
                     ]
                 ]);
             }

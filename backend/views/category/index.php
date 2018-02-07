@@ -1,7 +1,8 @@
 <?php
-use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\ActiveForm;
 
 $this->title = 'Категории';
 
@@ -14,6 +15,15 @@ $this->title = 'Категории';
     </button>
 ', ['create']) ?>
 
+<?php $form = ActiveForm::begin(['options' => ['data-pjax' => true ], 'method' => 'get', 'action' => ['index']]); ?>
+    <div class="form-group has-feedback has-feedback-left" style="max-width: 300px; float: right">
+        <input class="form-control ui-autocomplete-input" name="CategorySearch[search]" placeholder="Поиск" id="ac-basic" autocomplete="off" type="text">
+        <div class="form-control-feedback">
+            <i class="icon-search4 text-size-base"></i>
+        </div>
+    </div>
+<?php ActiveForm::end() ?>
+
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'columns' => [
@@ -24,7 +34,8 @@ $this->title = 'Категории';
                 return Html::img($model->picture, [
                     'alt' => 'category_photo',
                     'style' => [
-                        'height' => '50px'
+                        'height' => '50px',
+                        'width' => '80px'
                     ]
                 ]);
             }

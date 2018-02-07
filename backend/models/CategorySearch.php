@@ -32,7 +32,7 @@ class CategorySearch extends Model
         $this->load($params);
 
 
-        $query->andFilterWhere(['like', 'title', $this->search])
+        $query->andFilterWhere(['like', 'name', $this->search])
             ->orFilterWhere(['like', 'description', $this->search]);
 
         return $dataProvider;

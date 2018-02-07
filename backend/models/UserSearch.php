@@ -9,17 +9,15 @@ use common\models\User;
 class UserSearch extends User
 {
 
-    
+    public $search;
+
     public function rules()
     {
         return [
-            [['id', 'description_ua', 'description_en', 'stock', 'room_count', 'bed_count', 'floor'], 'integer'],
-            [['title_ru', 'title_ua', 'title_en', 'description_ru', 'coordinates', 'type', 'area', 'min_price', 'max_price', 'apartment_id',
-                'tv', 'iron', 'plazm_tv', 'fridge', 'balcony', 'door', 'smoke', 'drying_machine', 'separate_entrance', 'internet',
-                'washer_machine', 'gas', 'wifi', 'boiler', 'laptop', 'conditioner', 'jacuzzi', 'pool', 'image', 'comment'], 'safe'],
-            [['price_2', 'price_night', 'price_day', 'price_5', 'price_10', 'apartment_area'], 'number'],
+            [['search'], 'number'],
         ];
     }
+
     public function scenarios()
     {
         return Model::scenarios();
@@ -27,7 +25,7 @@ class UserSearch extends User
     
     public function search($params)
     {
-        $query = User::find();
+        $query = User::find()->orderBy(['created_at' => SORT_DESC]);
         
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -37,26 +35,14 @@ class UserSearch extends User
         ]);
         
         $this->load($params);
+        
+        $query->joinWith(['profile']);
+        
+        $query->andFilterWhere(['like', 'username', $this->search])
+            ->orFilterWhere(['like', 'email', $this->search])
+            ->orFilterWhere(['like', 'profile.name', $this->search])
+            ->orFilterWhere(['like', 'profile.surname', $this->search]);
 
-//        $query->andFilterWhere([
-//            'id' => $this->id,
-//            'description_ua' => $this->description_ua,
-//            'description_en' => $this->description_en,
-//            'stock' => $this->stock,
-//            'price_2' => $this->price_2,
-//            'price_night' => $this->price_night,
-//            'price_day' => $this->price_day,
-//            'price_5' => $this->price_5,
-//            'price_10' => $this->price_10,
-//            'room_count' => $this->room_count,
-//            'bed_count' => $this->bed_count,
-//            'floor' => $this->floor,
-//            'apartment_area' => $this->apartment_area,
-//        ]);
-        
-//        $query->joinWith(['facilities', 'comments']);
-        
-//        $query->andFilterWhere(['like', 'title_ru', $this->title_ru]);
         return $dataProvider;
     }
 }
