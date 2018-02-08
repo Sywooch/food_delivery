@@ -69,7 +69,8 @@ return [
                 'login' => '/site/login',
                 'logout' => '/site/logout',
                 'staff' => '/staff/index',
-                'category' => '/category/index'
+                'category' => '/category/index',
+                'products' => '/products/index'
             ],
         ],
         'assetManager' => [

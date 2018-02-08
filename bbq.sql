@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 07 2018 г., 16:42
+-- Время создания: Фев 08 2018 г., 12:40
 -- Версия сервера: 5.6.31
 -- Версия PHP: 5.6.23
 
@@ -62,8 +62,9 @@ CREATE TABLE IF NOT EXISTS `auth_item` (
 
 INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
 ('/category/*', 2, NULL, NULL, NULL, 1518003365, 1518003365),
+('/products/*', 2, NULL, NULL, NULL, 1518078634, 1518078634),
 ('/staff/*', 2, NULL, NULL, NULL, 1517912440, 1517912440),
-('Администратор', 1, NULL, NULL, NULL, 1517858831, 1518003370),
+('Администратор', 1, NULL, NULL, NULL, 1517858831, 1518078638),
 ('Менеджер', 1, NULL, NULL, NULL, 1517858840, 1517858840);
 
 -- --------------------------------------------------------
@@ -83,6 +84,7 @@ CREATE TABLE IF NOT EXISTS `auth_item_child` (
 
 INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 ('Администратор', '/category/*'),
+('Администратор', '/products/*'),
 ('Администратор', '/staff/*');
 
 -- --------------------------------------------------------
@@ -113,14 +115,47 @@ CREATE TABLE IF NOT EXISTS `category` (
   `meta_description` text,
   `status` int(11) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `category`
 --
 
 INSERT INTO `category` (`id`, `name`, `description`, `picture`, `meta_title`, `meta_description`, `status`, `created_at`) VALUES
-(1, 'Бургеры', 'Очень вкусные бургеры', '/backend/web/storage/category_images/5a7af7cb05295.jpg', 'Мета заголовок', 'Мета описание', 0, '2018-02-07 12:57:47');
+(1, 'Бургеры', '<p><strong>Очень вкусные бургеры</strong></p>\r\n', '/backend/web/storage/category_images/5a7c02354bd63.jpg', 'Мета заголовок', 'Мета описание', 1, '2018-02-07 12:57:47'),
+(2, 'Гриль', '<p>Очень вкусно!</p>\r\n', '/backend/web/storage/category_images/5a7c02401e40e.jpeg', '', '', 1, '2018-02-08 07:49:33'),
+(3, 'Салаты', '<p>Вкусные салаты</p>\r\n', '/backend/web/storage/category_images/5a7c024d0c725.jpg', '', '', 1, '2018-02-08 07:50:00'),
+(4, 'Супы', '<p>Вкусные супы</p>\r\n', '/backend/web/storage/category_images/5a7c026b03eaf.jpg', '', '', 1, '2018-02-08 07:50:17'),
+(5, 'Десерты', '<p>Вкусные десерты</p>\r\n', '/backend/web/storage/category_images/5a7c028195765.jpg', '', '', 1, '2018-02-08 07:51:10'),
+(6, 'Напитки', '<p>Вкусные напитки</p>\r\n', '/backend/web/storage/category_images/5a7c028bacc22.jpg', '', '', 1, '2018-02-08 07:51:26');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `products`
+--
+
+CREATE TABLE IF NOT EXISTS `products` (
+  `id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `composition` text NOT NULL,
+  `picture` varchar(255) DEFAULT NULL,
+  `price` double NOT NULL,
+  `discount_price` double DEFAULT NULL,
+  `meta_title` varchar(255) DEFAULT NULL,
+  `meta_description` text,
+  `status` int(11) DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `products`
+--
+
+INSERT INTO `products` (`id`, `category_id`, `title`, `description`, `composition`, `picture`, `price`, `discount_price`, `meta_title`, `meta_description`, `status`, `created_at`) VALUES
+(1, 1, 'Сочный бургер', '<p><strong>Супер бургер!</strong></p>\r\n', '<p>Состоит из:</p>\r\n\r\n<ol>\r\n	<li>Мяса</li>\r\n	<li>булки</li>\r\n</ol>\r\n', '/backend/web/storage/product_images/5a7c1920c7301.jpg', 120.5, 99.99, 'Мета заголовок', 'Мета описание', 1, '2018-02-08 09:32:16');
 
 -- --------------------------------------------------------
 
@@ -210,6 +245,13 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `products_ibfk_1` (`category_id`);
+
+--
 -- Индексы таблицы `profile`
 --
 ALTER TABLE `profile`
@@ -233,7 +275,12 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT для таблицы `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT для таблицы `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT для таблицы `profile`
 --
@@ -266,6 +313,12 @@ ALTER TABLE `auth_item`
 ALTER TABLE `auth_item_child`
   ADD CONSTRAINT `auth_item_child_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `profile`
