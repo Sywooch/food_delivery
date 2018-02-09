@@ -37,16 +37,14 @@ use yii\helpers\Html;
         </div>
     </div>
 
-
     <div class="sidebar-category sidebar-category-visible">
         <div class="category-content no-padding">
             <ul class="navigation navigation-main navigation-accordion">
-
                 <li class="navigation-header"><span>Меню</span> <i class="icon-menu" title="Main pages"></i></li>
-                <li class="active"><a href="<?= Url::to(['/site/index']) ?>"><i class="icon-home4"></i> <span>Главная</span></a></li>
-                <li><a href="<?= Url::to(['/staff/index']) ?>"><i class="icon-users2"></i> <span>Персонал</span></a></li>
-                <li><a href="<?= Url::to(['/category/index']) ?>"><i class="icon-price-tag2"></i> <span>Категории</span></a></li>
-                <li><a href="<?= Url::to(['/products/index']) ?>"><i class="icon-box"></i> <span>Продукты</span></a></li>
+                <li <?= Yii::$app->controller->id == 'site' ? 'class="active"' : '' ?>><a href="<?= Url::to(['/site/index']) ?>"><i class="icon-home4"></i> <span>Главная</span></a></li>
+                <li <?= Yii::$app->controller->id == 'staff' ? 'class="active"' : '' ?>><a href="<?= Url::to(['/staff/index']) ?>"><i class="icon-users2"></i> <span>Персонал</span></a></li>
+                <li <?= Yii::$app->controller->id == 'category' ? 'class="active"' : '' ?>><a href="<?= Url::to(['/category/index']) ?>"><i class="icon-price-tag2"></i> <span>Категории</span></a></li>
+                <li <?= Yii::$app->controller->id == 'products' ? 'class="active"' : '' ?>><a href="<?= Url::to(['/products/index']) ?>"><i class="icon-box"></i> <span>Продукты</span></a></li>
 <!--                <li>-->
 <!--                    <a href="#"><i class="icon-stack2"></i> <span>Page layouts</span></a>-->
 <!--                    <ul>-->
@@ -58,72 +56,6 @@ use yii\helpers\Html;
 <!--                        <li><a href="layout_footer_fixed.html">Fixed footer</a></li>-->
 <!--                    </ul>-->
 <!--                </li>-->
-<!--                <li>-->
-<!--                    <a href="#"><i class="icon-copy"></i> <span>Layouts</span></a>-->
-<!--                    <ul>-->
-<!--                        <li><a href="../../../layout_1/LTR/default/index.html" id="layout1">Layout 1</a></li>-->
-<!--                        <li><a href="index.html" id="layout2">Layout 2 <span class="label bg-warning-400">Current</span></a></li>-->
-<!--                        <li><a href="../../../layout_3/LTR/default/index.html" id="layout3">Layout 3</a></li>-->
-<!--                        <li><a href="../../../layout_4/LTR/default/index.html" id="layout4">Layout 4</a></li>-->
-<!--                        <li><a href="../../../layout_5/LTR/default/index.html" id="layout5">Layout 5</a></li>-->
-<!--                        <li class="disabled"><a href="../../../layout_6/LTR/default/index.html" id="layout6">Layout 6 <span class="label label-transparent">Coming soon</span></a></li>-->
-<!--                    </ul>-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                    <a href="#"><i class="icon-droplet2"></i> <span>Color system</span></a>-->
-<!--                    <ul>-->
-<!--                        <li><a href="colors_primary.html">Primary palette</a></li>-->
-<!--                        <li><a href="colors_danger.html">Danger palette</a></li>-->
-<!--                        <li><a href="colors_success.html">Success palette</a></li>-->
-<!--                        <li><a href="colors_warning.html">Warning palette</a></li>-->
-<!--                        <li><a href="colors_info.html">Info palette</a></li>-->
-<!--                        <li class="navigation-divider"></li>-->
-<!--                        <li><a href="colors_pink.html">Pink palette</a></li>-->
-<!--                        <li><a href="colors_violet.html">Violet palette</a></li>-->
-<!--                        <li><a href="colors_purple.html">Purple palette</a></li>-->
-<!--                        <li><a href="colors_indigo.html">Indigo palette</a></li>-->
-<!--                        <li><a href="colors_blue.html">Blue palette</a></li>-->
-<!--                        <li><a href="colors_teal.html">Teal palette</a></li>-->
-<!--                        <li><a href="colors_green.html">Green palette</a></li>-->
-<!--                        <li><a href="colors_orange.html">Orange palette</a></li>-->
-<!--                        <li><a href="colors_brown.html">Brown palette</a></li>-->
-<!--                        <li><a href="colors_grey.html">Grey palette</a></li>-->
-<!--                        <li><a href="colors_slate.html">Slate palette</a></li>-->
-<!--                    </ul>-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                    <a href="#"><i class="icon-stack"></i> <span>Starter kit</span></a>-->
-<!--                    <ul>-->
-<!--                        <li><a href="starters/horizontal_nav.html">Horizontal navigation</a></li>-->
-<!--                        <li><a href="starters/1_col.html">1 column</a></li>-->
-<!--                        <li><a href="starters/2_col.html">2 columns</a></li>-->
-<!--                        <li>-->
-<!--                            <a href="#">3 columns</a>-->
-<!--                            <ul>-->
-<!--                                <li><a href="starters/3_col_dual.html">Dual sidebars</a></li>-->
-<!--                                <li><a href="starters/3_col_double.html">Double sidebars</a></li>-->
-<!--                            </ul>-->
-<!--                        </li>-->
-<!--                        <li><a href="starters/4_col.html">4 columns</a></li>-->
-<!--                        <li>-->
-<!--                            <a href="#">Detached layout</a>-->
-<!--                            <ul>-->
-<!--                                <li><a href="starters/detached_left.html">Left sidebar</a></li>-->
-<!--                                <li><a href="starters/detached_right.html">Right sidebar</a></li>-->
-<!--                                <li><a href="starters/detached_sticky.html">Sticky sidebar</a></li>-->
-<!--                            </ul>-->
-<!--                        </li>-->
-<!--                        <li><a href="starters/layout_boxed.html">Boxed layout</a></li>-->
-<!--                        <li class="navigation-divider"></li>-->
-<!--                        <li><a href="starters/layout_navbar_fixed_main.html">Fixed main navbar</a></li>-->
-<!--                        <li><a href="starters/layout_navbar_fixed_secondary.html">Fixed secondary navbar</a></li>-->
-<!--                        <li><a href="starters/layout_navbar_fixed_both.html">Both navbars fixed</a></li>-->
-<!--                        <li><a href="starters/layout_fixed.html">Fixed layout</a></li>-->
-<!--                    </ul>-->
-<!--                </li>-->
-<!--                <li><a href="changelog.html"><i class="icon-list-unordered"></i> <span>Changelog <span class="label bg-blue-400">1.6</span></span></a></li>-->
-<!--                <li><a href="../../RTL/default/index.html"><i class="icon-width"></i> <span>RTL version</span></a></li>-->
-
             </ul>
         </div>
     </div>
