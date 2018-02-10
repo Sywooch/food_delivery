@@ -68,8 +68,8 @@ class RegisterStaff extends Model
         $auth_assignment = new AuthAssignment();
 
         $user->username = !empty($request['username']) ? $request['username'] : $request['name'].'_'.uniqid();
-        $user->password_hash = !empty($request['password']) ? $request['password'] : uniqid();
-        $user->password_hash = Yii::$app->security->generatePasswordHash(password_hash);
+        $password = !empty($request['password']) ? $request['password'] : uniqid();
+        $user->password_hash = Yii::$app->security->generatePasswordHash($password);
         $user->email = $request['email'];
         $user->generateAuthKey();
 
@@ -91,6 +91,8 @@ class RegisterStaff extends Model
                         $profile->save(false);
                     }
 
+                    $this->SendActivateEmail($user->username, $password, $user->email);
+
                     return true;
                 }
             } else {
@@ -100,6 +102,22 @@ class RegisterStaff extends Model
             return false;
         }
     }
-    
+
+    public function SendActivateEmail($login, $password, $to_email)
+    {
+        return Yii::$app
+            ->mailer
+            ->compose(
+                ['html' => 'activateAccount-html'],
+                [
+                    'login' => $login,
+                    'password' => $password
+                ]
+            )
+            ->setFrom([Yii::$app->params['adminEmail'] => 'BBQ'])
+            ->setTo($to_email)
+            ->setSubject('Доступ в панель администрации')
+            ->send();
+    }
 
 }

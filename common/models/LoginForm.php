@@ -23,6 +23,14 @@ class LoginForm extends Model
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'username' => 'Логин',
+            'password' => 'Пароль',
+            'rememberMe' => 'Запомнить'
+        ];
+    }
 
     public function validatePassword($attribute, $params)
     {
@@ -34,7 +42,6 @@ class LoginForm extends Model
         }
     }
 
-
     public function login()
     {
         if ($this->validate()) {
@@ -43,7 +50,6 @@ class LoginForm extends Model
         
         return false;
     }
-
 
     protected function getUser()
     {

@@ -43,7 +43,6 @@ return [
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
         ],
         'session' => [
-            // this is the name of the session cookie used for login on the backend
             'name' => 'advanced-backend',
         ],
         'log' => [
@@ -54,6 +53,19 @@ return [
                     'levels' => ['error', 'warning'],
                 ],
             ],
+        ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'viewPath' => '@app/mail',
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'username' => 'crm.urich@gmail.com',
+                'password' => '1995202009vasya',
+                'port' => '587',
+                'encryption' => 'tls',
+            ],
+            'useFileTransport' => false,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -70,7 +82,8 @@ return [
                 'logout' => '/site/logout',
                 'staff' => '/staff/index',
                 'category' => '/category/index',
-                'products' => '/products/index'
+                'products' => '/products/index',
+                'site-settings' => '/site-settings/index'
             ],
         ],
         'assetManager' => [

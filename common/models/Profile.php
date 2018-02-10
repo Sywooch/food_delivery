@@ -23,7 +23,7 @@ class Profile extends ActiveRecord
         return [
             [['name', 'surname'], 'required'],
             [['name', 'surname'], 'string', 'max' => 255],
-            [['user_avatar'], 'file'],
+            [['user_avatar'], 'file', 'extensions' => 'png, jpg, jpeg'],
         ];
     }
 

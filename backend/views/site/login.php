@@ -11,13 +11,13 @@ $this->title = 'Вход';
 <div class="panel panel-body login-form">
     <div class="text-center">
         <div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i></div>
-        <h5 class="content-group">Login to your account</h5>
+        <h5 class="content-group">Вход в ваш аккаут</h5>
     </div>
 
 
     <div class="form-group has-feedback has-feedback-left">
         <?= $form->field($model, 'username')
-            ->textInput(['autofocus' => true, 'placeholder' => 'Username'])
+            ->textInput(['autofocus' => true, 'placeholder' => 'Логин'])
             ->label(false) ?>
         <div class="form-control-feedback">
             <i class="icon-user text-muted"></i>
@@ -26,7 +26,7 @@ $this->title = 'Вход';
 
     <div class="form-group has-feedback has-feedback-left">
         <?= $form->field($model, 'password')
-            ->passwordInput(['placeholder' => 'Password'])
+            ->passwordInput(['placeholder' => 'Пароль'])
             ->label(false) ?>
         <div class="form-control-feedback">
             <i class="icon-lock2 text-muted"></i>
@@ -36,17 +36,17 @@ $this->title = 'Вход';
     <div class="form-group login-options">
         <div class="row">
             <div class="col-sm-6">
-                <?= $form->field($model, 'rememberMe')->checkbox(['label' => 'Remember', 'class' => 'styled']) ?>
+                <?= $form->field($model, 'rememberMe')->checkbox(['label' => 'Запомнить', 'class' => 'styled']) ?>
             </div>
 
             <div class="col-sm-6 text-right">
-                <a href="#">Forgot password?</a>
+                <a href="#">Забыли пароль?</a>
             </div>
         </div>
     </div>
 
     <div class="form-group">
-        <button type="submit" class="btn bg-blue btn-block">Login <i class="icon-arrow-left13 position-right"></i></button>
+        <button type="submit" class="btn bg-blue btn-block">Войти <i class="icon-arrow-left13 position-right"></i></button>
     </div>
 
 </div>
