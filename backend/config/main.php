@@ -83,7 +83,11 @@ return [
                 'staff' => '/staff/index',
                 'category' => '/category/index',
                 'products' => '/products/index',
-                'site-settings' => '/site-settings/index'
+                'site-settings' => '/site-settings/index',
+                'profile' => '/site/profile',
+                'change-password' => '/site/change-password',
+                'reset-password' => '/site/request-password-reset',
+                'new-password' => '/site/reset-password'
             ],
         ],
         'assetManager' => [

@@ -27,7 +27,8 @@ AppAsset::register($this);
     <div class="page-content">
         <div class="content-wrapper">
             <div class="content">
-                
+
+                <?= Alert::widget() ?>
                 <?= $content ?>
                 
                 <div class="footer text-muted text-center">

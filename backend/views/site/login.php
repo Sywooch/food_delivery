@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 $this->title = 'Вход';
@@ -40,7 +41,7 @@ $this->title = 'Вход';
             </div>
 
             <div class="col-sm-6 text-right">
-                <a href="#">Забыли пароль?</a>
+                <a href="<?= Url::to(['/site/request-password-reset']) ?>">Забыли пароль?</a>
             </div>
         </div>
     </div>
