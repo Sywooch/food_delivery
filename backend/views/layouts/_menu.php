@@ -13,7 +13,7 @@ use yii\helpers\Html;
             </div>
 
             <div class="sidebar-user-material-menu">
-                <a href="#user-nav" data-toggle="collapse" aria-expanded="true"><span>Мой аккаунт</span> <i class="caret"></i></a>
+                <a href="#user-nav" data-toggle="collapse" aria-expanded="true"><span>Мой аккаунт (<?= Yii::$app->user->identity->role->item_name ?>)</span> <i class="caret"></i></a>
             </div>
         </div>
 
