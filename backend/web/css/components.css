@@ -1161,6 +1161,7 @@ a.badge,
 * ---------------------------------------------------------------------------- */
 .page-container {
   position: relative;
+  height: 94.8vh;
 }
 @media (min-width: 769px) {
   .page-container {
