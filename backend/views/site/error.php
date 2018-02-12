@@ -1,27 +1,22 @@
 <?php
 
-/* @var $this yii\web\View */
-/* @var $name string */
-/* @var $message string */
-/* @var $exception Exception */
-
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = $name;
 ?>
-<div class="site-error">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="text-center content-group">
+    <h1 class="error-title"><?= $title = preg_replace("/[^0-9]/", '', $this->title); ?></h1>
+    <h5>Упс, произошла ошибка. <?= nl2br(Html::encode($message)) ?></h5>
+</div>
 
-    <div class="alert alert-danger">
-        <?= nl2br(Html::encode($message)) ?>
+<div class="row">
+    <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3">
+        <div class="row">
+            <div class="col-sm-12">
+                <a href="<?= Url::to(['/site/index']) ?>" class="btn btn-primary btn-block content-group"><i class="icon-circle-left2 position-left"></i> Вернуться на главную</a>
+            </div>
+        </div>
     </div>
-
-    <p>
-        The above error occurred while the Web server was processing your request.
-    </p>
-    <p>
-        Please contact us if you think this is a server error. Thank you.
-    </p>
-
 </div>

@@ -19,7 +19,8 @@ class SiteSettings extends ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['facebook_url', 'instagram_url'], 'string', 'max' => 255],
+            [['meta_description'], 'string'],
+            [['facebook_url', 'instagram_url', 'meta_title'], 'string', 'max' => 255],
             [['facebook_status', 'instagram_status'], 'integer'],
             [['site_logo'], 'file', 'extensions' => 'png, jpg, jpeg']
         ];
@@ -33,7 +34,9 @@ class SiteSettings extends ActiveRecord
             'instagram_url' => 'Instagram ссылка',
             'facebook_status' => 'Facebook статус',
             'instagram_status' => 'Instagram статус',
-            'site_logo' => 'Логотип сайта'
+            'site_logo' => 'Логотип сайта',
+            'meta_title' => 'Мета заголовок',
+            'meta_description' => 'Мета описание'
         ];
     }
 

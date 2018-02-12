@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.3
--- https://www.phpmyadmin.net/
+-- version 4.4.15.7
+-- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 11 2018 г., 13:12
--- Версия сервера: 5.7.19
--- Версия PHP: 7.0.21
+-- Время создания: Фев 12 2018 г., 11:58
+-- Версия сервера: 5.6.31
+-- Версия PHP: 5.6.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -28,7 +26,7 @@ SET time_zone = "+00:00";
 -- Структура таблицы `auth_assignment`
 --
 
-CREATE TABLE `auth_assignment` (
+CREATE TABLE IF NOT EXISTS `auth_assignment` (
   `item_name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `user_id` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` int(11) DEFAULT NULL
@@ -49,7 +47,7 @@ INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
 -- Структура таблицы `auth_item`
 --
 
-CREATE TABLE `auth_item` (
+CREATE TABLE IF NOT EXISTS `auth_item` (
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `type` smallint(6) NOT NULL,
   `description` text COLLATE utf8_unicode_ci,
@@ -79,7 +77,7 @@ INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `cr
 -- Структура таблицы `auth_item_child`
 --
 
-CREATE TABLE `auth_item_child` (
+CREATE TABLE IF NOT EXISTS `auth_item_child` (
   `parent` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `child` varchar(64) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -102,7 +100,7 @@ INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 -- Структура таблицы `auth_rule`
 --
 
-CREATE TABLE `auth_rule` (
+CREATE TABLE IF NOT EXISTS `auth_rule` (
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `data` blob,
   `created_at` int(11) DEFAULT NULL,
@@ -115,7 +113,7 @@ CREATE TABLE `auth_rule` (
 -- Структура таблицы `category`
 --
 
-CREATE TABLE `category` (
+CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
@@ -124,7 +122,7 @@ CREATE TABLE `category` (
   `meta_description` text,
   `status` int(11) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `category`
@@ -144,7 +142,7 @@ INSERT INTO `category` (`id`, `name`, `description`, `picture`, `meta_title`, `m
 -- Структура таблицы `products`
 --
 
-CREATE TABLE `products` (
+CREATE TABLE IF NOT EXISTS `products` (
   `id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
@@ -157,7 +155,7 @@ CREATE TABLE `products` (
   `meta_description` text,
   `status` int(11) DEFAULT '1',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `products`
@@ -172,14 +170,14 @@ INSERT INTO `products` (`id`, `category_id`, `title`, `description`, `compositio
 -- Структура таблицы `profile`
 --
 
-CREATE TABLE `profile` (
+CREATE TABLE IF NOT EXISTS `profile` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `surname` varchar(255) NOT NULL,
   `avatar` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `profile`
@@ -196,22 +194,24 @@ INSERT INTO `profile` (`id`, `name`, `surname`, `avatar`, `created_at`, `user_id
 -- Структура таблицы `site_settings`
 --
 
-CREATE TABLE `site_settings` (
+CREATE TABLE IF NOT EXISTS `site_settings` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `logo` varchar(255) DEFAULT NULL,
   `facebook_url` varchar(255) DEFAULT NULL,
   `instagram_url` varchar(255) DEFAULT NULL,
   `facebook_status` int(11) DEFAULT '1',
-  `instagram_status` int(11) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `instagram_status` int(11) DEFAULT '1',
+  `meta_title` varchar(255) DEFAULT NULL,
+  `meta_description` text
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `site_settings`
 --
 
-INSERT INTO `site_settings` (`id`, `name`, `logo`, `facebook_url`, `instagram_url`, `facebook_status`, `instagram_status`) VALUES
-(1, 'Модный сайт', '/backend/web/storage/site_logo/5a7f40244ef37.jpg', 'https://www.facebook.com/', 'https://www.instagram.com/?hl=ru', 1, 0);
+INSERT INTO `site_settings` (`id`, `name`, `logo`, `facebook_url`, `instagram_url`, `facebook_status`, `instagram_status`, `meta_title`, `meta_description`) VALUES
+(1, 'Модный сайт', '/backend/web/storage/site_logo/5a7f40244ef37.jpg', 'https://www.facebook.com/', 'https://www.instagram.com/?hl=ru', 1, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -219,7 +219,7 @@ INSERT INTO `site_settings` (`id`, `name`, `logo`, `facebook_url`, `instagram_ur
 -- Структура таблицы `user`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL,
   `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `auth_key` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
@@ -229,7 +229,7 @@ CREATE TABLE `user` (
   `status` smallint(6) NOT NULL DEFAULT '10',
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Дамп данных таблицы `user`
@@ -315,27 +315,27 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT для таблицы `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT для таблицы `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT для таблицы `site_settings`
 --
 ALTER TABLE `site_settings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
@@ -370,7 +370,6 @@ ALTER TABLE `products`
 --
 ALTER TABLE `profile`
   ADD CONSTRAINT `profile_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
