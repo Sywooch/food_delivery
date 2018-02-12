@@ -35,7 +35,8 @@ $this->title = 'Категории';
                     'alt' => 'category_photo',
                     'style' => [
                         'height' => '50px',
-                        'width' => '80px'
+                        'width' => '80px',
+                        'border-radius' => '2px'
                     ]
                 ]);
             }

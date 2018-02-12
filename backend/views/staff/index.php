@@ -70,7 +70,7 @@ $this->title = 'Персонал';
             'header' => 'Статус',
             'format' => 'raw',
             'value' => function($model){
-                if($model->status == 0) return '<span class="label label-danger">Удален</span>';
+                if($model->status == 0) return '<span class="label label-danger">Заблокирован</span>';
                 if($model->status == 10) return '<span class="label label-success">Активный</span>';
             }
         ],
@@ -83,22 +83,22 @@ $this->title = 'Персонал';
                 } else {
                     return $model->status == 10 ?
                         Html::a('<span class="icon-pencil6"></span>', ['update', 'id' => $model->id], ['title' => 'Отредактировать']).' '.
-                        Html::a('<span class="icon-trash"></span>', ['delete', 'id' => $model->id],
+                        Html::a('<span class="icon-lock2"></span>', ['delete', 'id' => $model->id],
                                [
-                                   'title' => 'Удалить',
+                                   'title' => 'Заблокировать',
                                    'data' => [
                                        'method' => 'post',
-                                       'confirm' => 'Вы уверены что хотите удалить пользователя?'
+                                       'confirm' => 'Вы уверены что хотите заблокировать пользователя?'
                                    ]
                                ])
                         :
                         Html::a('<span class="icon-pencil6"></span>', ['update', 'id' => $model->id], ['title' => 'Отредактировать']).' '.
                         Html::a('<span class="icon-clipboard5"></span>', ['activate', 'id' => $model->id],
                             [
-                                'title' => 'Восстановить',
+                                'title' => 'Разблокировать',
                                 'data' => [
                                     'method' => 'post',
-                                    'confirm' => 'Вы уверены что хотите восстановить пользователя?'
+                                    'confirm' => 'Вы уверены что хотите разблокировать пользователя?'
                                 ]
                             ]);
                 }

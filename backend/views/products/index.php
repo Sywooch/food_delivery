@@ -34,8 +34,9 @@ $this->title = 'Продукты';
                 return Html::img($model->picture, [
                     'alt' => 'product_photo',
                     'style' => [
-                        'height' => '50px',
-                        'width' => '80px'
+                        'height' => '58px',
+                        'width' => '58px',
+                        'border-radius' => '2px'
                     ]
                 ]);
             }
