@@ -15,7 +15,7 @@ $this->title = $name;
     <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3">
         <div class="row">
             <div class="col-sm-12">
-                <a href="<?= Url::to(['/site/index']) ?>" class="btn btn-primary btn-block content-group"><i class="icon-circle-left2 position-left"></i> Вернуться на главную</a>
+                <a href="<?= Url::to(['/dashboard/index']) ?>" class="btn btn-primary btn-block content-group"><i class="icon-circle-left2 position-left"></i> Вернуться на главную</a>
             </div>
         </div>
     </div>
