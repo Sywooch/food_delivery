@@ -24,7 +24,6 @@ class AppAsset extends AssetBundle
         'js/plugins/forms/styling/uniform.min.js',
         'js/core/app.js',
         'js/pages/form_layouts.js',
-        
 
         'js/plugins/ui/moment/moment.min.js',
         'js/plugins/pickers/daterangepicker.js',

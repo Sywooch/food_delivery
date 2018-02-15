@@ -21,7 +21,7 @@ $this->title = 'Платежная система';
         <div class="panel-body">
 
             <fieldset>
-                <legend class="text-semibold"><i class="icon-store position-left"></i> LiQPay</legend>
+                <legend class="text-semibold"><i class="icon-credit-card2 position-left"></i> LiQPay</legend>
 
                 <?= $form->field($model, 'payment_name')->textInput(['class' => 'form-control', 'placeholder' => 'Название']) ?>
 

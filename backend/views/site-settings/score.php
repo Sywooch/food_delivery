@@ -19,13 +19,9 @@ $this->title = 'Системма баллов';
             </div>
 
             <div class="panel-body">
-
-                    <fieldset>
-                        <legend class="text-semibold"><i class="icon-store position-left"></i> Основная информация</legend>
-
-                        <?= $form->field($model, 'score')->textInput(['class' => 'form-control', 'placeholder' => 'Количество']) ?>
-
-                    </fieldset>
+                <fieldset>
+                    <?= $form->field($model, 'score')->textInput(['class' => 'form-control', 'placeholder' => 'Количество']) ?>
+                </fieldset>
 
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary">Сохранить <i class="icon-arrow-right14 position-right"></i></button>
