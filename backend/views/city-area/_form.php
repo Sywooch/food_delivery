@@ -4,7 +4,7 @@ use yii\bootstrap\ActiveForm;
 use dosamigos\ckeditor\CKEditor;
 ?>
 
-<div class="col-md-9">
+<div class="col-md-4">
     <?php $form = ActiveForm::begin(['id' => 'delivery-area-form']); ?>
         <div class="panel panel-flat">
             <div class="panel-heading">

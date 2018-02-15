@@ -1,11 +1,11 @@
 <?php
 namespace backend\controllers;
 
-use common\models\SiteSettings;
 use Yii;
 use yii\web\Controller;
 use yii\web\UploadedFile;
-
+use common\models\PaymentSystem;
+use common\models\SiteSettings;
 
 class SiteSettingsController extends Controller
 {
@@ -50,6 +50,33 @@ class SiteSettingsController extends Controller
         }
         
         return $this->render('score', [
+            'model' => $model
+        ]);
+    }
+    
+    public function actionPaymentSystem()
+    {
+        $model = PaymentSystem::findOne(1);
+        
+        if($model->load(Yii::$app->request->post())){
+            $model->public_key = base64_encode($model->public_key);
+            $model->private_key = base64_encode($model->private_key);
+
+            if($model->save()){
+                Yii::$app->session->setFlash('success', 'Изменения успешно сохранены!');
+
+                return $this->refresh();
+            } else {
+                Yii::$app->session->setFlash('danger', 'Невозможно сохранить данные!');
+
+                return $this->refresh();
+            }
+        }
+
+        $model->public_key = base64_decode($model->public_key);
+        $model->private_key = base64_decode($model->private_key);
+        
+        return $this->render('payment-system', [
             'model' => $model
         ]);
     }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 15 2018 г., 15:36
+-- Время создания: Фев 15 2018 г., 16:20
 -- Версия сервера: 5.6.31
 -- Версия PHP: 5.6.23
 
@@ -166,6 +166,27 @@ INSERT INTO `city_area` (`id`, `region`, `delivery_price`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `payment_system`
+--
+
+CREATE TABLE IF NOT EXISTS `payment_system` (
+  `id` int(11) NOT NULL,
+  `public_key` text NOT NULL,
+  `private_key` text NOT NULL,
+  `payment_name` varchar(255) NOT NULL,
+  `sandbox` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `payment_system`
+--
+
+INSERT INTO `payment_system` (`id`, `public_key`, `private_key`, `payment_name`, `sandbox`) VALUES
+(1, 'ZmdqbmZ5Njdodmc0NWh5ZjRmaDdm', 'c2RmZ3NkZmczNDV3Y3R3dGM0Y3Q=', 'Оплата заказа', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `products`
 --
 
@@ -316,6 +337,12 @@ ALTER TABLE `city_area`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `payment_system`
+--
+ALTER TABLE `payment_system`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `products`
 --
 ALTER TABLE `products`
@@ -358,6 +385,11 @@ ALTER TABLE `category`
 --
 ALTER TABLE `city_area`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT для таблицы `payment_system`
+--
+ALTER TABLE `payment_system`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT для таблицы `products`
 --
