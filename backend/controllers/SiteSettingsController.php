@@ -36,5 +36,22 @@ class SiteSettingsController extends Controller
             'model' => $model
         ]);
     }
+    
+    public function actionScore()
+    {
+        $model = SiteSettings::find()
+            ->where(['id' => 1])
+            ->one();
+        
+        if($model->load(Yii::$app->request->post()) && $model->save()){
+            Yii::$app->session->setFlash('success', 'Сохранения успешно изменены!');
+            
+            return $this->refresh();
+        }
+        
+        return $this->render('score', [
+            'model' => $model
+        ]);
+    }
 
 }

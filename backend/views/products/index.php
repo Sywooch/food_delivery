@@ -54,7 +54,7 @@ $this->title = 'Продукты';
         [
             'header' => 'Акционная цена',
             'value' => function($model) {
-                return $model->price.' грн.';
+                return $model->discount_price.' грн.';
             }
         ],
         [

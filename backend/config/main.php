@@ -91,7 +91,8 @@ return [
                 'profile' => '/site/profile',
                 'change-password' => '/site/change-password',
                 'reset-password' => '/site/request-password-reset',
-                'new-password' => '/site/reset-password'
+                'new-password' => '/site/reset-password',
+                'city-area' => '/city-area/index'
             ],
         ],
         'assetManager' => [

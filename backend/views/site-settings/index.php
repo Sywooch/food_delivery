@@ -37,16 +37,17 @@ $this->title = 'Настройки сайта';
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-md-6">
+                                <?= $form->field($model, 'time_from')->textInput(['class' => 'form-control', 'id' => 'anytime-time']) ?>
+                            </div>
+                            <div class="col-md-6">
+                                <?= $form->field($model, 'time_to')->textInput(['class' => 'form-control', 'id' => 'anytime-time-second']) ?>
+                            </div>
+                        </div>
+
                     </fieldset>
 
-                    <fieldset>
-                        <legend class="text-semibold"><i class="icon-price-tag2 position-left"></i> Мета данные главной страницы</legend>
-
-                        <?= $form->field($model, 'meta_title')->textInput(['class' => 'form-control', 'placeholder' => 'Заголовок']) ?>
-
-                        <?= $form->field($model, 'meta_description')->textarea(['class' => 'form-control', 'cols' => 5, 'rows' => 5, 'placeholder' => 'Описание']) ?>
-
-                    </fieldset>
                 </div>
 
                 <div class="col-md-6">
@@ -94,6 +95,17 @@ $this->title = 'Настройки сайта';
                                 </div>
                             </div>
                         </div>
+
+                        <fieldset>
+                            <legend class="text-semibold"><i class="icon-price-tag2 position-left"></i> Мета данные главной страницы</legend>
+
+                            <?= $form->field($model, 'page_title')->textInput(['class' => 'form-control', 'placeholder' => 'Заголовок']) ?>
+
+                            <?= $form->field($model, 'meta_title')->textInput(['class' => 'form-control', 'placeholder' => 'Заголовок']) ?>
+
+                            <?= $form->field($model, 'meta_description')->textarea(['class' => 'form-control', 'cols' => 5, 'rows' => 5, 'placeholder' => 'Описание']) ?>
+
+                        </fieldset>
 
                     </fieldset>
                 </div>

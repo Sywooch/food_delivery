@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 12 2018 г., 11:58
+-- Время создания: Фев 15 2018 г., 15:36
 -- Версия сервера: 5.6.31
 -- Версия PHP: 5.6.23
 
@@ -63,12 +63,13 @@ CREATE TABLE IF NOT EXISTS `auth_item` (
 
 INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
 ('/category/*', 2, NULL, NULL, NULL, 1518003365, 1518003365),
-('/debug/default/toolbar', 2, NULL, NULL, NULL, 1518338869, 1518338869),
+('/city-area/*', 2, NULL, NULL, NULL, 1518695448, 1518695448),
+('/debug/*', 2, NULL, NULL, NULL, 1518428732, 1518428732),
 ('/products/*', 2, NULL, NULL, NULL, 1518078634, 1518078634),
 ('/site-settings/*', 2, NULL, NULL, NULL, 1518285050, 1518285050),
 ('/site/*', 2, NULL, NULL, NULL, 1518334805, 1518334805),
 ('/staff/*', 2, NULL, NULL, NULL, 1517912440, 1517912440),
-('Администратор', 1, NULL, NULL, NULL, 1517858831, 1518338876),
+('Администратор', 1, NULL, NULL, NULL, 1517858831, 1518695452),
 ('Менеджер', 1, NULL, NULL, NULL, 1517858840, 1517858840);
 
 -- --------------------------------------------------------
@@ -88,7 +89,8 @@ CREATE TABLE IF NOT EXISTS `auth_item_child` (
 
 INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 ('Администратор', '/category/*'),
-('Администратор', '/debug/default/toolbar'),
+('Администратор', '/city-area/*'),
+('Администратор', '/debug/*'),
 ('Администратор', '/products/*'),
 ('Администратор', '/site-settings/*'),
 ('Администратор', '/site/*'),
@@ -122,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `meta_description` text,
   `status` int(11) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `category`
@@ -139,6 +141,31 @@ INSERT INTO `category` (`id`, `name`, `description`, `picture`, `meta_title`, `m
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `city_area`
+--
+
+CREATE TABLE IF NOT EXISTS `city_area` (
+  `id` int(11) NOT NULL,
+  `region` varchar(255) NOT NULL,
+  `delivery_price` decimal(10,2) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `city_area`
+--
+
+INSERT INTO `city_area` (`id`, `region`, `delivery_price`) VALUES
+(1, 'Центр', '50.00'),
+(2, 'Правый берег', '65.00'),
+(3, 'Бабурка', '80.00'),
+(4, 'Павло-Кичкас', '70.00'),
+(5, 'Шевченковский', '80.00'),
+(6, 'Космос', '85.00'),
+(7, 'Пески', '75.00');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `products`
 --
 
@@ -149,8 +176,8 @@ CREATE TABLE IF NOT EXISTS `products` (
   `description` text NOT NULL,
   `composition` text NOT NULL,
   `picture` varchar(255) DEFAULT NULL,
-  `price` double NOT NULL,
-  `discount_price` double DEFAULT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `discount_price` decimal(10,2) DEFAULT NULL,
   `meta_title` varchar(255) DEFAULT NULL,
   `meta_description` text,
   `status` int(11) DEFAULT '1',
@@ -162,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `products` (
 --
 
 INSERT INTO `products` (`id`, `category_id`, `title`, `description`, `composition`, `picture`, `price`, `discount_price`, `meta_title`, `meta_description`, `status`, `created_at`) VALUES
-(1, 1, 'Сочный бургер', '<p><strong>Супер бургер!</strong></p>\r\n', '<p>Состоит из:</p>\r\n\r\n<ol>\r\n	<li>Мяса</li>\r\n	<li>булки</li>\r\n</ol>\r\n', '/backend/web/storage/product_images/5a7c1920c7301.jpg', 120.5, 99.99, 'Мета заголовок', 'Мета описание', 1, '2018-02-08 09:32:16');
+(1, 1, 'Сочный бургер', '<p><strong>Супер бургер!</strong></p>\r\n', '<p>Состоит из:</p>\r\n\r\n<ol>\r\n	<li>Мяса</li>\r\n	<li>булки</li>\r\n</ol>\r\n', '/backend/web/storage/product_images/5a7c1920c7301.jpg', '115.50', '78.99', 'Мета заголовок', 'Мета описание', 1, '2018-02-08 09:32:16');
 
 -- --------------------------------------------------------
 
@@ -198,10 +225,14 @@ CREATE TABLE IF NOT EXISTS `site_settings` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `logo` varchar(255) DEFAULT NULL,
+  `time_from` varchar(10) NOT NULL,
+  `time_to` varchar(10) NOT NULL,
+  `score` int(11) NOT NULL,
   `facebook_url` varchar(255) DEFAULT NULL,
   `instagram_url` varchar(255) DEFAULT NULL,
   `facebook_status` int(11) DEFAULT '1',
   `instagram_status` int(11) DEFAULT '1',
+  `page_title` varchar(255) DEFAULT NULL,
   `meta_title` varchar(255) DEFAULT NULL,
   `meta_description` text
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
@@ -210,8 +241,8 @@ CREATE TABLE IF NOT EXISTS `site_settings` (
 -- Дамп данных таблицы `site_settings`
 --
 
-INSERT INTO `site_settings` (`id`, `name`, `logo`, `facebook_url`, `instagram_url`, `facebook_status`, `instagram_status`, `meta_title`, `meta_description`) VALUES
-(1, 'Модный сайт', '/backend/web/storage/site_logo/5a7f40244ef37.jpg', 'https://www.facebook.com/', 'https://www.instagram.com/?hl=ru', 1, 0, NULL, NULL);
+INSERT INTO `site_settings` (`id`, `name`, `logo`, `time_from`, `time_to`, `score`, `facebook_url`, `instagram_url`, `facebook_status`, `instagram_status`, `page_title`, `meta_title`, `meta_description`) VALUES
+(1, 'BBQ delivery', '/backend/web/storage/site_logo/5a856fe254585.jpg', '08:00', '20:00', 50, 'https://www.facebook.com/', 'https://www.instagram.com/?hl=ru', 1, 0, 'BBQ', 'BBQ Запорожье', 'Лучшая доставка в городе!');
 
 -- --------------------------------------------------------
 
@@ -237,8 +268,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'admin', 't4lPoUKAyP63FC2CV5f-luTIfNiG-Fls', '$2y$13$CtBVxEo9es.RqgXe2cfL8unNx0hMNNmwrr4htzQAzM/J/4dobSS6.', NULL, 'prybylov.v@gmail.com', 10, 1517858167, 1518343937),
-(14, 'Name_5a7ada7999d35', 'SZRkgQ9jmer26fw0LlOwhU6UF6ce126s', '$2y$13$rH4fWuW.0EzM99gN.suQe.l.vJzSh97tMbMSvUna/1uTvXkHuYDwG', NULL, 'some@gmail.com', 10, 1517996958, 1518000761),
-(21, 'Администратор_5a7f4fc4cb663', 'uLZN4fiSohSioetHOLqhoL3bTSx9X6Hi', '$2y$13$QSBMC9snjDNwYgDOV5alJ.tyizLsjJ35eJhD0KpvvPWZyIY6Q.a7K', NULL, 'prybylov2.v@gmail.com', 10, 1518292933, 1518292933);
+(14, 'Name_5a7ada7999d35', 'SZRkgQ9jmer26fw0LlOwhU6UF6ce126s', '$2y$13$rH4fWuW.0EzM99gN.suQe.l.vJzSh97tMbMSvUna/1uTvXkHuYDwG', NULL, 'some@gmail.com', 10, 1517996958, 1518599021),
+(21, 'Администратор_5a7f4fc4cb663', 'uLZN4fiSohSioetHOLqhoL3bTSx9X6Hi', '$2y$13$QSBMC9snjDNwYgDOV5alJ.tyizLsjJ35eJhD0KpvvPWZyIY6Q.a7K', NULL, 'prybylov2.v@gmail.com', 10, 1518292933, 1518445847);
 
 --
 -- Индексы сохранённых таблиц
@@ -279,6 +310,12 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `city_area`
+--
+ALTER TABLE `city_area`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `products`
 --
 ALTER TABLE `products`
@@ -315,7 +352,12 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT для таблицы `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT для таблицы `city_area`
+--
+ALTER TABLE `city_area`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT для таблицы `products`
 --

@@ -470,6 +470,10 @@ $(function() {
         format: "%H:%i"
     });
 
+    $("#anytime-time-second").AnyTime_picker({
+        format: "%H:%i"
+    });
+
 
     // Display hours only
     $("#anytime-time-hours").AnyTime_picker({
