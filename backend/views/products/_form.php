@@ -93,9 +93,23 @@ use dosamigos\ckeditor\CKEditor;
                     <fieldset>
                         <legend class="text-semibold"><i class="icon-price-tag2 position-left"></i> Дополнительные данные</legend>
 
-                        <?= $form->field($model, 'price')->textInput(['class' => 'form-control', 'placeholder' => 'Цена продукта']) ?>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <?= $form->field($model, 'price')->textInput(['class' => 'form-control', 'placeholder' => 'Цена продукта']) ?>
+                            </div>
+                            <div class="col-md-6">
+                                <?= $form->field($model, 'discount_price')->textInput(['class' => 'form-control', 'placeholder' => 'Акционная цена продукта']) ?>
+                            </div>
+                        </div>
 
-                        <?= $form->field($model, 'discount_price')->textInput(['class' => 'form-control', 'placeholder' => 'Акционная цена продукта']) ?>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <?= $form->field($model, 'picture_alt')->textInput(['class' => 'form-control', 'placeholder' => 'Alt']) ?>
+                            </div>
+                            <div class="col-md-6">
+                                <?= $form->field($model, 'picture_title')->textInput(['class' => 'form-control', 'placeholder' => 'Title']) ?>
+                            </div>
+                        </div>
 
                         <?= $form->field($model, 'meta_title')->textInput(['class' => 'form-control', 'placeholder' => 'Заголовок']) ?>
 

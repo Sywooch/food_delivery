@@ -81,6 +81,10 @@ use dosamigos\ckeditor\CKEditor;
                             </div>
                         <?php endif; ?>
 
+                        <?= $form->field($model, 'picture_alt')->textInput(['class' => 'form-control', 'placeholder' => 'Alt']) ?>
+
+                        <?= $form->field($model, 'picture_title')->textInput(['class' => 'form-control', 'placeholder' => 'Title']) ?>
+
                     </div>
                 </fieldset>
 

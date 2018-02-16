@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 16 2018 г., 14:40
+-- Время создания: Фев 16 2018 г., 17:29
 -- Версия сервера: 5.6.31
 -- Версия PHP: 7.0.8
 
@@ -141,6 +141,8 @@ CREATE TABLE IF NOT EXISTS `category` (
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `picture` varchar(255) DEFAULT NULL,
+  `picture_alt` varchar(255) DEFAULT NULL,
+  `picture_title` varchar(255) DEFAULT NULL,
   `meta_title` varchar(255) DEFAULT NULL,
   `meta_description` text,
   `status` int(11) NOT NULL DEFAULT '1',
@@ -151,13 +153,13 @@ CREATE TABLE IF NOT EXISTS `category` (
 -- Дамп данных таблицы `category`
 --
 
-INSERT INTO `category` (`id`, `name`, `description`, `picture`, `meta_title`, `meta_description`, `status`, `created_at`) VALUES
-(1, 'Бургеры', '<p><strong>Очень вкусные бургеры</strong></p>\r\n', '/backend/web/storage/category_images/5a7c02354bd63.jpg', 'Мета заголовок', 'Мета описание', 1, '2018-02-07 12:57:47'),
-(2, 'Гриль', '<p>Очень вкусно!</p>\r\n', '/backend/web/storage/category_images/5a7c02401e40e.jpeg', '', '', 1, '2018-02-08 07:49:33'),
-(3, 'Салаты', '<p>Вкусные салаты</p>\r\n', '/backend/web/storage/category_images/5a7c024d0c725.jpg', '', '', 1, '2018-02-08 07:50:00'),
-(4, 'Супы', '<p>Вкусные супы</p>\r\n', '/backend/web/storage/category_images/5a7c026b03eaf.jpg', '', '', 1, '2018-02-08 07:50:17'),
-(5, 'Десерты', '<p>Вкусные десерты</p>\r\n', '/backend/web/storage/category_images/5a7c028195765.jpg', '', '', 1, '2018-02-08 07:51:10'),
-(6, 'Напитки', '<p>Вкусные напитки</p>\r\n', '/backend/web/storage/category_images/5a7c028bacc22.jpg', '', '', 1, '2018-02-08 07:51:26');
+INSERT INTO `category` (`id`, `name`, `description`, `picture`, `picture_alt`, `picture_title`, `meta_title`, `meta_description`, `status`, `created_at`) VALUES
+(1, 'Бургеры', '<p><strong>Очень вкусные бургеры</strong></p>\r\n', '/backend/web/storage/category_images/5a7c02354bd63.jpg', NULL, NULL, 'Мета заголовок', 'Мета описание', 1, '2018-02-07 12:57:47'),
+(2, 'Гриль', '<p>Очень вкусно!</p>\r\n', '/backend/web/storage/category_images/5a7c02401e40e.jpeg', NULL, NULL, '', '', 1, '2018-02-08 07:49:33'),
+(3, 'Салаты', '<p>Вкусные салаты</p>\r\n', '/backend/web/storage/category_images/5a7c024d0c725.jpg', NULL, NULL, '', '', 1, '2018-02-08 07:50:00'),
+(4, 'Супы', '<p>Вкусные супы</p>\r\n', '/backend/web/storage/category_images/5a7c026b03eaf.jpg', NULL, NULL, '', '', 1, '2018-02-08 07:50:17'),
+(5, 'Десерты', '<p>Вкусные десерты</p>\r\n', '/backend/web/storage/category_images/5a7c028195765.jpg', NULL, NULL, '', '', 1, '2018-02-08 07:51:10'),
+(6, 'Напитки', '<p>Вкусные напитки</p>\r\n', '/backend/web/storage/category_images/5a7c028bacc22.jpg', '', '', '', '', 1, '2018-02-08 07:51:26');
 
 -- --------------------------------------------------------
 
@@ -239,6 +241,8 @@ CREATE TABLE IF NOT EXISTS `products` (
   `description` text NOT NULL,
   `composition` text NOT NULL,
   `picture` varchar(255) DEFAULT NULL,
+  `picture_alt` varchar(255) DEFAULT NULL,
+  `picture_title` varchar(255) DEFAULT NULL,
   `price` decimal(10,2) NOT NULL,
   `discount_price` decimal(10,2) DEFAULT NULL,
   `meta_title` varchar(255) DEFAULT NULL,
@@ -251,8 +255,8 @@ CREATE TABLE IF NOT EXISTS `products` (
 -- Дамп данных таблицы `products`
 --
 
-INSERT INTO `products` (`id`, `category_id`, `title`, `description`, `composition`, `picture`, `price`, `discount_price`, `meta_title`, `meta_description`, `status`, `created_at`) VALUES
-(1, 1, 'Сочный бургер', '<p><strong>Супер бургер!</strong></p>\r\n', '<p>Состоит из:</p>\r\n\r\n<ol>\r\n	<li>Мяса</li>\r\n	<li>булки</li>\r\n</ol>\r\n', '/backend/web/storage/product_images/5a7c1920c7301.jpg', '115.50', '78.99', 'Мета заголовок', 'Мета описание', 1, '2018-02-08 09:32:16');
+INSERT INTO `products` (`id`, `category_id`, `title`, `description`, `composition`, `picture`, `picture_alt`, `picture_title`, `price`, `discount_price`, `meta_title`, `meta_description`, `status`, `created_at`) VALUES
+(1, 1, 'Сочный бургер', '<p><strong>Супер бургер!</strong></p>\r\n', '<p>Состоит из:</p>\r\n\r\n<ol>\r\n	<li>Мяса</li>\r\n	<li>булки</li>\r\n</ol>\r\n', '/backend/web/storage/product_images/5a7c1920c7301.jpg', '', '', '115.50', '78.99', 'Test meta', 'Test meta description', 1, '2018-02-08 09:32:16');
 
 -- --------------------------------------------------------
 
@@ -288,6 +292,8 @@ CREATE TABLE IF NOT EXISTS `site_settings` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `logo` varchar(255) DEFAULT NULL,
+  `logo_alt` varchar(255) DEFAULT NULL,
+  `logo_title` varchar(255) DEFAULT NULL,
   `time_from` varchar(10) NOT NULL,
   `time_to` varchar(10) NOT NULL,
   `score` int(11) NOT NULL,
@@ -307,8 +313,8 @@ CREATE TABLE IF NOT EXISTS `site_settings` (
 -- Дамп данных таблицы `site_settings`
 --
 
-INSERT INTO `site_settings` (`id`, `name`, `logo`, `time_from`, `time_to`, `score`, `facebook_url`, `instagram_url`, `facebook_status`, `instagram_status`, `main_address`, `latitude`, `longitude`, `page_title`, `meta_title`, `meta_description`) VALUES
-(1, 'BBQ delivery', '/backend/web/storage/site_logo/5a856fe254585.jpg', '08:00', '20:00', 50, 'https://www.facebook.com/', 'https://www.instagram.com/?hl=ru', 1, 0, 'улица Патриотическая, 17, Запорожье, Запорожская область, Украина', '47.8485804', '35.11274419999995', 'BBQ', 'BBQ Запорожье', 'Лучшая доставка в городе!');
+INSERT INTO `site_settings` (`id`, `name`, `logo`, `logo_alt`, `logo_title`, `time_from`, `time_to`, `score`, `facebook_url`, `instagram_url`, `facebook_status`, `instagram_status`, `main_address`, `latitude`, `longitude`, `page_title`, `meta_title`, `meta_description`) VALUES
+(1, 'BBQ delivery', '/backend/web/storage/site_logo/5a856fe254585.jpg', 'logo', 'bbq', '08:00', '20:00', 50, 'https://www.facebook.com/', 'https://www.instagram.com/?hl=ru', 1, 0, 'улица Патриотическая, 17, Запорожье, Запорожская область, Украина', '47.8485804', '35.11274419999995', 'BBQ', 'BBQ Запорожье', 'Лучшая доставка в городе!');
 
 -- --------------------------------------------------------
 

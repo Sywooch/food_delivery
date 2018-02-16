@@ -21,7 +21,7 @@ class SiteSettings extends ActiveRecord
             [['name', 'time_from', 'time_to', 'score', 'main_address'], 'required'],
             [['main_address', 'meta_description'], 'string'],
             [['time_from', 'time_to'], 'string', 'max' => 10],
-            [['facebook_url', 'instagram_url', 'page_title', 'latitude', 'longitude', 'meta_title'], 'string', 'max' => 255],
+            [['facebook_url', 'instagram_url', 'page_title', 'latitude', 'longitude', 'meta_title', 'logo_alt', 'logo_title'], 'string', 'max' => 255],
             [['facebook_status', 'instagram_status', 'score'], 'integer'],
             [['site_logo'], 'file', 'extensions' => 'png, jpg, jpeg']
         ];
@@ -42,7 +42,9 @@ class SiteSettings extends ActiveRecord
             'meta_description' => 'Мета описание',
             'time_from' => 'Часы работы "от"',
             'time_to' => 'Часы работы "до"',
-            'score' => 'Количество гривен за 1 балл'
+            'score' => 'Количество гривен за 1 балл',
+            'logo_alt' => 'Alt логотипа',
+            'logo_title' => 'Title логотипа'
         ];
     }
 

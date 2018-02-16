@@ -105,6 +105,15 @@ $this->title = 'Настройки сайта';
                         <fieldset>
                             <legend class="text-semibold"><i class="icon-price-tag2 position-left"></i> Мета данные главной страницы</legend>
 
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <?= $form->field($model, 'logo_alt')->textInput(['class' => 'form-control', 'placeholder' => 'Alt']) ?>
+                                </div>
+                                <div class="col-md-6">
+                                    <?= $form->field($model, 'logo_title')->textInput(['class' => 'form-control', 'placeholder' => 'Title']) ?>
+                                </div>
+                            </div>
+
                             <?= $form->field($model, 'page_title')->textInput(['class' => 'form-control', 'placeholder' => 'Заголовок']) ?>
 
                             <?= $form->field($model, 'meta_title')->textInput(['class' => 'form-control', 'placeholder' => 'Заголовок']) ?>
