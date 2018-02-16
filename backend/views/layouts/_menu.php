@@ -47,6 +47,7 @@ use yii\helpers\Html;
                     <a href="#"><i class="icon-cog5"></i> <span>Настройки сайта</span></a>
                     <ul>
                         <li><a href="<?= Url::to(['/site-settings/index']) ?>">Главная страница</a></li>
+                        <li><a href="<?= Url::to(['/site-settings/address']) ?>">Адреса и телефоны</a></li>
                         <li><a href="<?= Url::to(['/site-settings/score']) ?>">Система баллов</a></li>
                         <li><a href="<?= Url::to(['/site-settings/payment-system']) ?>">Платежная система</a></li>
                         <li><a href="<?= Url::to(['/city-area/index']) ?>">Районы доставки</a></li>

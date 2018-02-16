@@ -2,14 +2,18 @@
 namespace backend\controllers;
 
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 use common\models\PaymentSystem;
 use common\models\SiteSettings;
+use common\models\Addresses;
+use common\models\Phones;
 
 class SiteSettingsController extends Controller
 {
 
+    //Настройки главной страницы сайта
     public function actionIndex()
     {
         $model = SiteSettings::findOne(1);
@@ -36,7 +40,8 @@ class SiteSettingsController extends Controller
             'model' => $model
         ]);
     }
-    
+
+    //Система баллов
     public function actionScore()
     {
         $model = SiteSettings::find()
@@ -53,7 +58,8 @@ class SiteSettingsController extends Controller
             'model' => $model
         ]);
     }
-    
+
+    //Настройки LiQPay
     public function actionPaymentSystem()
     {
         $model = PaymentSystem::findOne(1);
@@ -79,6 +85,127 @@ class SiteSettingsController extends Controller
         return $this->render('payment-system', [
             'model' => $model
         ]);
+    }
+
+    //Адреса и телефоны
+    public function actionAddress()
+    {
+        $addressDataProvider = new ActiveDataProvider([
+            'query' => Addresses::find()
+                ->orderBy(['created_at' => SORT_DESC]),
+            'pagination' => [
+                'pageSize' => 20
+            ]
+        ]);
+
+        $phoneDataProvider = new ActiveDataProvider([
+            'query' => Phones::find()
+                ->orderBy(['created_at' => SORT_DESC]),
+            'pagination' => [
+                'pageSize' => 20
+            ]
+        ]);
+
+        return $this->render('address', [
+            'phoneDataProvider' => $phoneDataProvider,
+            'addressDataProvider' => $addressDataProvider
+        ]);
+    }
+    
+    //Добавление нового адреса
+    public function actionAddressCreate()
+    {
+        $model = new Addresses();
+        
+        if($model->load(Yii::$app->request->post()) && $model->save()){
+            Yii::$app->session->setFlash('success', 'Адрес успешно добавлен!');
+            
+            return $this->redirect('address');
+        }
+        
+        return $this->render('address-create', [
+            'model' => $model
+        ]);
+    }
+
+    //Редактирование адреса
+    public function actionAddressUpdate($id)
+    {
+        $model = Addresses::findOne($id);
+
+        if($model->load(Yii::$app->request->post()) && $model->save()){
+            Yii::$app->session->setFlash('warning', 'Адрес успешно отредактирован!');
+
+            return $this->redirect('address');
+        }
+
+        return $this->render('address-update', [
+            'model' => $model
+        ]);
+    }
+
+    //Удаление адреса
+    public function actionAddressDelete($id)
+    {
+        $model = Addresses::findOne($id);
+        
+        if($model && $model->delete()){
+            Yii::$app->session->setFlash('danger', 'Адрес успешно удален!');
+
+            return $this->redirect('address');
+        }
+
+        Yii::$app->session->setFlash('danger', 'Невозможно удалить адрес!');
+
+        return $this->redirect('address');
+    }
+
+    //Добавление нового номера телефона
+    public function actionPhoneCreate()
+    {
+        $model = new Phones();
+
+        if($model->load(Yii::$app->request->post()) && $model->save()){
+            Yii::$app->session->setFlash('success', 'Номер телефона успешно добавлен!');
+
+            return $this->redirect('address');
+        }
+
+        return $this->render('phone-create', [
+            'model' => $model
+        ]);
+    }
+
+    //Редактирование номера телефона
+    public function actionPhoneUpdate($id)
+    {
+        $model = Phones::findOne($id);
+
+        if($model->load(Yii::$app->request->post()) && $model->save()){
+            Yii::$app->session->setFlash('warning', 'Номер телефона успешно отредактирован!');
+
+            return $this->redirect('address');
+        }
+
+        return $this->render('phone-update', [
+            'model' => $model
+        ]);
+    }
+
+    //Удаление номера телефона
+    public function actionPhoneDelete($id)
+    {
+        $model = Phones::findOne($id);
+
+        if($model && $model->delete()){
+            Yii::$app->session->setFlash('danger', 'Номер успешно удален!');
+
+            return $this->redirect('address');
+        }
+
+        Yii::$app->session->setFlash('danger', 'Невозможно удалить номер телефона!');
+
+        return $this->redirect('address');
     }
 
 }

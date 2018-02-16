@@ -1171,7 +1171,7 @@ a.badge,
   }
   @-moz-document url-prefix() {
     .page-container {
-      height: 1px;
+      /*height: 1px;*/
     }
   }
 }

@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 15 2018 г., 16:20
+-- Время создания: Фев 16 2018 г., 12:17
 -- Версия сервера: 5.6.31
--- Версия PHP: 5.6.23
+-- Версия PHP: 7.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,6 +19,27 @@ SET time_zone = "+00:00";
 --
 -- База данных: `bbq`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `addresses`
+--
+
+CREATE TABLE IF NOT EXISTS `addresses` (
+  `id` int(11) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `addresses`
+--
+
+INSERT INTO `addresses` (`id`, `address`, `created_at`) VALUES
+(2, 'ул.Верхняя 11А', '2018-02-16 09:13:16'),
+(3, 'ул. Нижняя 3Б', '2018-02-16 09:17:00'),
+(4, 'ул.Средняя 24', '2018-02-16 09:17:12');
 
 -- --------------------------------------------------------
 
@@ -124,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `meta_description` text,
   `status` int(11) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `category`
@@ -148,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `city_area` (
   `id` int(11) NOT NULL,
   `region` varchar(255) NOT NULL,
   `delivery_price` decimal(10,2) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `city_area`
@@ -183,6 +204,27 @@ CREATE TABLE IF NOT EXISTS `payment_system` (
 
 INSERT INTO `payment_system` (`id`, `public_key`, `private_key`, `payment_name`, `sandbox`) VALUES
 (1, 'ZmdqbmZ5Njdodmc0NWh5ZjRmaDdm', 'c2RmZ3NkZmczNDV3Y3R3dGM0Y3Q=', 'Оплата заказа', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `phones`
+--
+
+CREATE TABLE IF NOT EXISTS `phones` (
+  `id` int(11) NOT NULL,
+  `phone` varchar(50) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `phones`
+--
+
+INSERT INTO `phones` (`id`, `phone`, `created_at`) VALUES
+(2, '+3 (050) 874 39 32', '2018-02-16 09:14:09'),
+(3, '+3 (096) 789 45 61', '2018-02-16 09:14:16'),
+(4, '+3 (345) 634 56 34', '2018-02-16 09:16:33');
 
 -- --------------------------------------------------------
 
@@ -297,6 +339,12 @@ INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_res
 --
 
 --
+-- Индексы таблицы `addresses`
+--
+ALTER TABLE `addresses`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `auth_assignment`
 --
 ALTER TABLE `auth_assignment`
@@ -343,6 +391,12 @@ ALTER TABLE `payment_system`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `phones`
+--
+ALTER TABLE `phones`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `products`
 --
 ALTER TABLE `products`
@@ -376,20 +430,30 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT для таблицы `addresses`
+--
+ALTER TABLE `addresses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
 -- AUTO_INCREMENT для таблицы `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT для таблицы `city_area`
 --
 ALTER TABLE `city_area`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT для таблицы `payment_system`
 --
 ALTER TABLE `payment_system`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT для таблицы `phones`
+--
+ALTER TABLE `phones`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT для таблицы `products`
 --
