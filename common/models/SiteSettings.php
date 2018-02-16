@@ -18,10 +18,10 @@ class SiteSettings extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'time_from', 'time_to', 'score'], 'required'],
-            [['meta_description'], 'string'],
+            [['name', 'time_from', 'time_to', 'score', 'main_address'], 'required'],
+            [['main_address', 'meta_description'], 'string'],
             [['time_from', 'time_to'], 'string', 'max' => 10],
-            [['facebook_url', 'instagram_url', 'page_title', 'meta_title'], 'string', 'max' => 255],
+            [['facebook_url', 'instagram_url', 'page_title', 'latitude', 'longitude', 'meta_title'], 'string', 'max' => 255],
             [['facebook_status', 'instagram_status', 'score'], 'integer'],
             [['site_logo'], 'file', 'extensions' => 'png, jpg, jpeg']
         ];
@@ -35,6 +35,7 @@ class SiteSettings extends ActiveRecord
             'instagram_url' => 'Instagram ссылка',
             'facebook_status' => 'Facebook статус',
             'instagram_status' => 'Instagram статус',
+            'main_address' => 'Адрес',
             'site_logo' => 'Логотип сайта',
             'page_title' => 'Заголовок страницы',
             'meta_title' => 'Мета заголовок',

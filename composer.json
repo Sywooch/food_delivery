@@ -20,7 +20,7 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "mdmsoft/yii2-admin": "~2.0",
         "2amigos/yii2-ckeditor-widget": "~1.0",
-        "wbraganca/yii2-dynamicform": "*"
+        "kalyabin/yii2-select-google-map-location": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

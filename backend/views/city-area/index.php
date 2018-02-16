@@ -8,41 +8,46 @@ $this->title = 'Районы города';
 
 ?>
 
-<?= Html::a('
-    <button type="button" class="btn bg-teal-400 btn-labeled legitRipple">
-        <b><i class="icon-plus3"></i></b>
-        Новый район
-    </button>
-', ['create']) ?>
+<div class="col-md-5">
+    <?= Html::a('
+        <button type="button" class="btn bg-teal-400 btn-labeled legitRipple">
+            <b><i class="icon-plus3"></i></b>
+            Новый район
+        </button>
+    ', ['create']) ?>
 
-<?= GridView::widget([
-    'dataProvider' => $dataProvider,
-    'columns' => [
-        [
-            'header' => 'Район доставки',
-            'value' => 'region'
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            [
+                'class' => 'yii\grid\SerialColumn',
+                'header' => '#',
+            ],
+            [
+                'header' => 'Район доставки',
+                'value' => 'region'
+            ],
+            [
+                'header' => 'Стоимость доставки',
+                'value' => function($model){
+                    return $model->delivery_price . ' грн';
+                }
+            ],
+            [
+                'header' => 'Действия',
+                'format' => 'raw',
+                'value' => function($model) {
+                    return
+                        Html::a('<span class="icon-pencil6"></span>', ['update', 'id' => $model->id], ['title' => 'Отредактировать']).' '.
+                        Html::a('<span class="icon-trash"></span>', ['delete', 'id' => $model->id],
+                            [
+                                'title' => 'Удалить',
+                                'data' => [
+                                    'confirm' => 'Вы уверены что хотите удалить район доставки?'
+                                ]
+                            ]);
+                }
+            ]
         ],
-        [
-            'header' => 'Стоимость доставки',
-            'value' => function($model){
-                return $model->delivery_price . ' грн';
-            }
-        ],
-        [
-            'header' => 'Действия',
-            'format' => 'raw',
-            'value' => function($model) {
-                return
-                    Html::a('<span class="icon-pencil6"></span>', ['update', 'id' => $model->id], ['title' => 'Отредактировать']).' '.
-                    Html::a('<span class="icon-trash"></span>', ['delete', 'id' => $model->id],
-                        [
-                            'title' => 'Удалить',
-                            'data' => [
-                                'confirm' => 'Вы уверены что хотите удалить район доставки?'
-                            ]
-                        ]);
-            }
-        ]
-    ],
-]); ?>
-
+    ]); ?>
+</div>

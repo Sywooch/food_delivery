@@ -28,6 +28,10 @@ $this->title = 'Продукты';
     'dataProvider' => $dataProvider,
     'columns' => [
         [
+            'class' => 'yii\grid\SerialColumn',
+            'header' => '#',
+        ],
+        [
             'header' => 'Фото',
             'format' => 'raw',
             'value' => function($model) {

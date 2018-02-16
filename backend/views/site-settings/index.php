@@ -46,6 +46,12 @@ $this->title = 'Настройки сайта';
                             </div>
                         </div>
 
+                        <?= $form->field($model, 'main_address')->widget(\kalyabin\maplocation\SelectMapLocationWidget::className(), [
+                            'attributeLatitude' => 'latitude',
+                            'attributeLongitude' => 'longitude',
+                            'googleMapApiKey' => 'AIzaSyDvdY_YjgJ2FCdyfMZ89DGodrrtOXpvETA',
+                        ]); ?>
+
                     </fieldset>
 
                 </div>

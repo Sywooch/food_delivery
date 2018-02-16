@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 16 2018 г., 12:17
+-- Время создания: Фев 16 2018 г., 14:40
 -- Версия сервера: 5.6.31
 -- Версия PHP: 7.0.8
 
@@ -203,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `payment_system` (
 --
 
 INSERT INTO `payment_system` (`id`, `public_key`, `private_key`, `payment_name`, `sandbox`) VALUES
-(1, 'ZmdqbmZ5Njdodmc0NWh5ZjRmaDdm', 'c2RmZ3NkZmczNDV3Y3R3dGM0Y3Q=', 'Оплата заказа', 0);
+(1, 'ZmdqbmZ5Njdodmc0NWh5ZjRmaDdm', 'c2RmZ3NkZmczNDV3Y3R3dGM0Y3Q=', 'Оплата заказа', 1);
 
 -- --------------------------------------------------------
 
@@ -295,6 +295,9 @@ CREATE TABLE IF NOT EXISTS `site_settings` (
   `instagram_url` varchar(255) DEFAULT NULL,
   `facebook_status` int(11) DEFAULT '1',
   `instagram_status` int(11) DEFAULT '1',
+  `main_address` text NOT NULL,
+  `latitude` varchar(255) DEFAULT NULL,
+  `longitude` varchar(255) DEFAULT NULL,
   `page_title` varchar(255) DEFAULT NULL,
   `meta_title` varchar(255) DEFAULT NULL,
   `meta_description` text
@@ -304,8 +307,8 @@ CREATE TABLE IF NOT EXISTS `site_settings` (
 -- Дамп данных таблицы `site_settings`
 --
 
-INSERT INTO `site_settings` (`id`, `name`, `logo`, `time_from`, `time_to`, `score`, `facebook_url`, `instagram_url`, `facebook_status`, `instagram_status`, `page_title`, `meta_title`, `meta_description`) VALUES
-(1, 'BBQ delivery', '/backend/web/storage/site_logo/5a856fe254585.jpg', '08:00', '20:00', 50, 'https://www.facebook.com/', 'https://www.instagram.com/?hl=ru', 1, 0, 'BBQ', 'BBQ Запорожье', 'Лучшая доставка в городе!');
+INSERT INTO `site_settings` (`id`, `name`, `logo`, `time_from`, `time_to`, `score`, `facebook_url`, `instagram_url`, `facebook_status`, `instagram_status`, `main_address`, `latitude`, `longitude`, `page_title`, `meta_title`, `meta_description`) VALUES
+(1, 'BBQ delivery', '/backend/web/storage/site_logo/5a856fe254585.jpg', '08:00', '20:00', 50, 'https://www.facebook.com/', 'https://www.instagram.com/?hl=ru', 1, 0, 'улица Патриотическая, 17, Запорожье, Запорожская область, Украина', '47.8485804', '35.11274419999995', 'BBQ', 'BBQ Запорожье', 'Лучшая доставка в городе!');
 
 -- --------------------------------------------------------
 
