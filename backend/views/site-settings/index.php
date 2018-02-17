@@ -3,7 +3,6 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 $this->title = 'Настройки сайта';
-
 ?>
 
 <?php $form = ActiveForm::begin(['id' => 'site-settings-form',]); ?>
@@ -45,6 +44,8 @@ $this->title = 'Настройки сайта';
                                 <?= $form->field($model, 'time_to')->textInput(['class' => 'form-control', 'id' => 'anytime-time-second']) ?>
                             </div>
                         </div>
+
+                        <?= $form->field($model, 'contact_email')->textInput(['class' => 'form-control']) ?>
 
                         <?= $form->field($model, 'main_address')->widget(\kalyabin\maplocation\SelectMapLocationWidget::className(), [
                             'attributeLatitude' => 'latitude',

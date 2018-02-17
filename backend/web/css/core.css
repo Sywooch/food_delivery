@@ -510,6 +510,7 @@ a.bg-danger:focus {
 }
 .text-semibold {
   font-weight: 500;
+  font-size: 16px;
 }
 .text-regular {
   font-weight: 400;
@@ -6570,6 +6571,7 @@ a.list-group-item-danger:focus {
 .panel-flat > .panel-heading > .panel-title {
   margin-top: 2px;
   margin-bottom: 2px;
+  font-size: 24px;
 }
 .panel-flat > .panel-heading + .tab-content > .has-padding {
   padding-top: 0;

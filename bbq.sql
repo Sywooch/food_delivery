@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 16 2018 г., 17:29
+-- Время создания: Фев 17 2018 г., 15:44
 -- Версия сервера: 5.6.31
 -- Версия PHP: 7.0.8
 
@@ -87,10 +87,11 @@ INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `cr
 ('/city-area/*', 2, NULL, NULL, NULL, 1518695448, 1518695448),
 ('/debug/*', 2, NULL, NULL, NULL, 1518428732, 1518428732),
 ('/products/*', 2, NULL, NULL, NULL, 1518078634, 1518078634),
+('/recommend-products/*', 2, NULL, NULL, NULL, 1518868820, 1518868820),
 ('/site-settings/*', 2, NULL, NULL, NULL, 1518285050, 1518285050),
 ('/site/*', 2, NULL, NULL, NULL, 1518334805, 1518334805),
 ('/staff/*', 2, NULL, NULL, NULL, 1517912440, 1517912440),
-('Администратор', 1, NULL, NULL, NULL, 1517858831, 1518695452),
+('Администратор', 1, NULL, NULL, NULL, 1517858831, 1518868824),
 ('Менеджер', 1, NULL, NULL, NULL, 1517858840, 1517858840);
 
 -- --------------------------------------------------------
@@ -113,6 +114,7 @@ INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 ('Администратор', '/city-area/*'),
 ('Администратор', '/debug/*'),
 ('Администратор', '/products/*'),
+('Администратор', '/recommend-products/*'),
 ('Администратор', '/site-settings/*'),
 ('Администратор', '/site/*'),
 ('Администратор', '/staff/*');
@@ -285,12 +287,33 @@ INSERT INTO `profile` (`id`, `name`, `surname`, `avatar`, `created_at`, `user_id
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `recommend_products`
+--
+
+CREATE TABLE IF NOT EXISTS `recommend_products` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `status` int(11) DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `recommend_products`
+--
+
+INSERT INTO `recommend_products` (`id`, `product_id`, `status`, `created_at`) VALUES
+(5, 1, 0, '2018-02-17 12:44:23');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `site_settings`
 --
 
 CREATE TABLE IF NOT EXISTS `site_settings` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `contact_email` varchar(255) NOT NULL,
   `logo` varchar(255) DEFAULT NULL,
   `logo_alt` varchar(255) DEFAULT NULL,
   `logo_title` varchar(255) DEFAULT NULL,
@@ -313,8 +336,8 @@ CREATE TABLE IF NOT EXISTS `site_settings` (
 -- Дамп данных таблицы `site_settings`
 --
 
-INSERT INTO `site_settings` (`id`, `name`, `logo`, `logo_alt`, `logo_title`, `time_from`, `time_to`, `score`, `facebook_url`, `instagram_url`, `facebook_status`, `instagram_status`, `main_address`, `latitude`, `longitude`, `page_title`, `meta_title`, `meta_description`) VALUES
-(1, 'BBQ delivery', '/backend/web/storage/site_logo/5a856fe254585.jpg', 'logo', 'bbq', '08:00', '20:00', 50, 'https://www.facebook.com/', 'https://www.instagram.com/?hl=ru', 1, 0, 'улица Патриотическая, 17, Запорожье, Запорожская область, Украина', '47.8485804', '35.11274419999995', 'BBQ', 'BBQ Запорожье', 'Лучшая доставка в городе!');
+INSERT INTO `site_settings` (`id`, `name`, `contact_email`, `logo`, `logo_alt`, `logo_title`, `time_from`, `time_to`, `score`, `facebook_url`, `instagram_url`, `facebook_status`, `instagram_status`, `main_address`, `latitude`, `longitude`, `page_title`, `meta_title`, `meta_description`) VALUES
+(1, 'BBQ delivery', 'vasya@gmail.com', '/backend/web/storage/site_logo/5a856fe254585.jpg', 'logo', 'bbq', '08:00', '20:00', 50, 'https://www.facebook.com/', 'https://www.instagram.com/?hl=ru', 1, 0, 'улица Патриотическая, 17, Запорожье, Запорожская область, Украина', '47.8485804', '35.11274419999995', 'BBQ', 'BBQ Запорожье', 'Лучшая доставка в городе!');
 
 -- --------------------------------------------------------
 
@@ -340,7 +363,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'admin', 't4lPoUKAyP63FC2CV5f-luTIfNiG-Fls', '$2y$13$CtBVxEo9es.RqgXe2cfL8unNx0hMNNmwrr4htzQAzM/J/4dobSS6.', NULL, 'prybylov.v@gmail.com', 10, 1517858167, 1518343937),
-(14, 'Name_5a7ada7999d35', 'SZRkgQ9jmer26fw0LlOwhU6UF6ce126s', '$2y$13$rH4fWuW.0EzM99gN.suQe.l.vJzSh97tMbMSvUna/1uTvXkHuYDwG', NULL, 'some@gmail.com', 10, 1517996958, 1518599021),
+(14, 'Name_5a7ada7999d35', 'SZRkgQ9jmer26fw0LlOwhU6UF6ce126s', '$2y$13$rH4fWuW.0EzM99gN.suQe.l.vJzSh97tMbMSvUna/1uTvXkHuYDwG', NULL, 'some@gmail.com', 10, 1517996958, 1518864297),
 (21, 'Администратор_5a7f4fc4cb663', 'uLZN4fiSohSioetHOLqhoL3bTSx9X6Hi', '$2y$13$QSBMC9snjDNwYgDOV5alJ.tyizLsjJ35eJhD0KpvvPWZyIY6Q.a7K', NULL, 'prybylov2.v@gmail.com', 10, 1518292933, 1518445847);
 
 --
@@ -420,6 +443,13 @@ ALTER TABLE `profile`
   ADD KEY `profile_ibfk_1` (`user_id`);
 
 --
+-- Индексы таблицы `recommend_products`
+--
+ALTER TABLE `recommend_products`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `recommend_products_ibfk_1` (`product_id`);
+
+--
 -- Индексы таблицы `site_settings`
 --
 ALTER TABLE `site_settings`
@@ -474,6 +504,11 @@ ALTER TABLE `products`
 ALTER TABLE `profile`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
+-- AUTO_INCREMENT для таблицы `recommend_products`
+--
+ALTER TABLE `recommend_products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
 -- AUTO_INCREMENT для таблицы `site_settings`
 --
 ALTER TABLE `site_settings`
@@ -517,6 +552,12 @@ ALTER TABLE `products`
 --
 ALTER TABLE `profile`
   ADD CONSTRAINT `profile_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `recommend_products`
+--
+ALTER TABLE `recommend_products`
+  ADD CONSTRAINT `recommend_products_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -431,6 +431,9 @@ a.badge,
   min-height: 44px;
   font-weight: 500;
 }
+.control-label {
+  font-weight: bold;
+}
 .navigation > li > a .label,
 .navigation > li > a .badge {
   -webkit-transition: background-color ease-in-out 0.15s, border-color ease-in-out 0.15s;
@@ -20302,6 +20305,7 @@ thead .htCollapseButton:after {
 .display-block,
 label.display-block {
   display: block;
+  font-weight: bold;
 }
 .display-inline-block {
   display: inline-block;

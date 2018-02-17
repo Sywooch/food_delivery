@@ -92,7 +92,8 @@ return [
                 'change-password' => '/site/change-password',
                 'reset-password' => '/site/request-password-reset',
                 'new-password' => '/site/reset-password',
-                'city-area' => '/city-area/index'
+                'city-area' => '/city-area/index',
+                'recommend-products' => '/recommend-products/index'
             ],
         ],
         'assetManager' => [

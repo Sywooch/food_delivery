@@ -18,7 +18,8 @@ class SiteSettings extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'time_from', 'time_to', 'score', 'main_address'], 'required'],
+            [['name', 'time_from', 'time_to', 'score', 'main_address', 'contact_email'], 'required'],
+            [['contact_email'], 'email'],
             [['main_address', 'meta_description'], 'string'],
             [['time_from', 'time_to'], 'string', 'max' => 10],
             [['facebook_url', 'instagram_url', 'page_title', 'latitude', 'longitude', 'meta_title', 'logo_alt', 'logo_title'], 'string', 'max' => 255],
@@ -44,7 +45,8 @@ class SiteSettings extends ActiveRecord
             'time_to' => 'Часы работы "до"',
             'score' => 'Количество гривен за 1 балл',
             'logo_alt' => 'Alt логотипа',
-            'logo_title' => 'Title логотипа'
+            'logo_title' => 'Title логотипа',
+            'contact_email' => 'Email для формы обратной связи'
         ];
     }
 
