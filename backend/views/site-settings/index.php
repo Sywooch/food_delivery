@@ -38,6 +38,15 @@ $this->title = 'Настройки сайта';
 
                         <div class="row">
                             <div class="col-md-6">
+                                <?= $form->field($model, 'logo_alt')->textInput(['class' => 'form-control', 'placeholder' => 'Alt']) ?>
+                            </div>
+                            <div class="col-md-6">
+                                <?= $form->field($model, 'logo_title')->textInput(['class' => 'form-control', 'placeholder' => 'Title']) ?>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
                                 <?= $form->field($model, 'time_from')->textInput(['class' => 'form-control', 'id' => 'anytime-time']) ?>
                             </div>
                             <div class="col-md-6">
@@ -103,26 +112,6 @@ $this->title = 'Настройки сайта';
                             </div>
                         </div>
 
-                        <fieldset>
-                            <legend class="text-semibold"><i class="icon-price-tag2 position-left"></i> Мета данные главной страницы</legend>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <?= $form->field($model, 'logo_alt')->textInput(['class' => 'form-control', 'placeholder' => 'Alt']) ?>
-                                </div>
-                                <div class="col-md-6">
-                                    <?= $form->field($model, 'logo_title')->textInput(['class' => 'form-control', 'placeholder' => 'Title']) ?>
-                                </div>
-                            </div>
-
-                            <?= $form->field($model, 'page_title')->textInput(['class' => 'form-control', 'placeholder' => 'Заголовок']) ?>
-
-                            <?= $form->field($model, 'meta_title')->textInput(['class' => 'form-control', 'placeholder' => 'Заголовок']) ?>
-
-                            <?= $form->field($model, 'meta_description')->textarea(['class' => 'form-control', 'cols' => 5, 'rows' => 5, 'placeholder' => 'Описание']) ?>
-
-                        </fieldset>
-
                     </fieldset>
                 </div>
             </div>
@@ -132,4 +121,95 @@ $this->title = 'Настройки сайта';
             </div>
         </div>
     </div>
+<?php ActiveForm::end(); ?>
+
+<?php $form = ActiveForm::begin(['id' => 'site-seo-settings-form',]); ?>
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h5 class="panel-title">SEO</h5>
+        <div class="heading-elements">
+            <ul class="icons-list">
+                <li><a data-action="collapse"></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <fieldset>
+            <legend class="text-semibold"><i class="icon-store position-left"></i> Основная информация</legend>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <?= $form->field($seo, 'title_page')->textInput(['class' => 'form-control']) ?>
+
+                    <?= $form->field($seo, 'meta_title')->textInput(['class' => 'form-control']) ?>
+
+                    <?= $form->field($seo, 'meta_description')->textarea(['class' => 'form-control']) ?>
+
+                    <?= $form->field($seo, 'og_title')->textInput(['class' => 'form-control']) ?>
+
+                    <?= $form->field($seo, 'og_description')->textarea(['class' => 'form-control']) ?>
+
+                    <label class="control-label">og:image</label>
+                    <div class="media no-margin-top">
+                        <div class="media-left">
+                            <a href="#"><img src="<?= !empty($seo->og_image) ? $seo->og_image : '/backend/web/images/placeholder.jpg' ?>" style="width: 58px; height: 58px; border-radius: 2px;" alt=""></a>
+                        </div>
+
+                        <div class="media-body">
+                            <div class="uploader">
+                                <?= $form->field($seo, 'facebook_image')->fileInput(['class' => 'file-styled'])->label(false) ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <?= $form->field($seo, 'twitter_card')->textInput(['class' => 'form-control']) ?>
+
+                    <?= $form->field($seo, 'twitter_title')->textInput(['class' => 'form-control']) ?>
+
+                    <?= $form->field($seo, 'twitter_description')->textarea(['class' => 'form-control']) ?>
+
+                    <label class="control-label">twitter:image</label>
+                    <div class="media no-margin-top">
+                        <div class="media-left">
+                            <a href="#"><img src="<?= !empty($seo->twitter_image) ? $seo->twitter_image : '/backend/web/images/placeholder.jpg' ?>" style="width: 58px; height: 58px; border-radius: 2px;" alt=""></a>
+                        </div>
+
+                        <div class="media-body">
+                            <div class="uploader">
+                                <?= $form->field($seo, 'twitter_image_upload')->fileInput(['class' => 'file-styled'])->label(false) ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <?= $form->field($seo, 'twitter_image_alt')->textInput(['class' => 'form-control']) ?>
+
+                    <?= $form->field($seo, 'page_priority')->dropDownList([
+                                '0.4' => '0.4',
+                                '0.6' => '0.6',
+                                '0.8' => '0.8',
+                                '1' => '1'
+                            ],
+                        ['prompt' => 'Выберите приоритет страницы', 'class' => 'select'])
+                    ?>
+
+                    <?= $form->field($seo, 'update_frequency')->dropDownList([
+                        'day' => 'Ежедневно',
+                        'week' => 'Еженедельно',
+                        'month' => 'Ежемесячно'
+                    ],
+                        ['prompt' => 'Выберите частоту обновления', 'class' => 'select'])
+                    ?>
+                </div>
+            </div>
+
+        </fieldset>
+
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary">Сохранить <i class="icon-arrow-right14 position-right"></i></button>
+        </div>
+    </div>
+</div>
 <?php ActiveForm::end(); ?>

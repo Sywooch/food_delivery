@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.15.7
--- http://www.phpmyadmin.net
+-- version 4.7.3
+-- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 17 2018 г., 15:44
--- Версия сервера: 5.6.31
--- Версия PHP: 7.0.8
+-- Время создания: Фев 18 2018 г., 21:34
+-- Версия сервера: 5.7.19
+-- Версия PHP: 7.0.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -26,11 +28,11 @@ SET time_zone = "+00:00";
 -- Структура таблицы `addresses`
 --
 
-CREATE TABLE IF NOT EXISTS `addresses` (
+CREATE TABLE `addresses` (
   `id` int(11) NOT NULL,
   `address` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `addresses`
@@ -47,7 +49,7 @@ INSERT INTO `addresses` (`id`, `address`, `created_at`) VALUES
 -- Структура таблицы `auth_assignment`
 --
 
-CREATE TABLE IF NOT EXISTS `auth_assignment` (
+CREATE TABLE `auth_assignment` (
   `item_name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `user_id` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` int(11) DEFAULT NULL
@@ -68,7 +70,7 @@ INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
 -- Структура таблицы `auth_item`
 --
 
-CREATE TABLE IF NOT EXISTS `auth_item` (
+CREATE TABLE `auth_item` (
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `type` smallint(6) NOT NULL,
   `description` text COLLATE utf8_unicode_ci,
@@ -91,7 +93,7 @@ INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `cr
 ('/site-settings/*', 2, NULL, NULL, NULL, 1518285050, 1518285050),
 ('/site/*', 2, NULL, NULL, NULL, 1518334805, 1518334805),
 ('/staff/*', 2, NULL, NULL, NULL, 1517912440, 1517912440),
-('Администратор', 1, NULL, NULL, NULL, 1517858831, 1518868824),
+('Администратор', 1, NULL, NULL, NULL, 1517858831, 1518971130),
 ('Менеджер', 1, NULL, NULL, NULL, 1517858840, 1517858840);
 
 -- --------------------------------------------------------
@@ -100,7 +102,7 @@ INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `cr
 -- Структура таблицы `auth_item_child`
 --
 
-CREATE TABLE IF NOT EXISTS `auth_item_child` (
+CREATE TABLE `auth_item_child` (
   `parent` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `child` varchar(64) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -125,7 +127,7 @@ INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 -- Структура таблицы `auth_rule`
 --
 
-CREATE TABLE IF NOT EXISTS `auth_rule` (
+CREATE TABLE `auth_rule` (
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `data` blob,
   `created_at` int(11) DEFAULT NULL,
@@ -138,30 +140,28 @@ CREATE TABLE IF NOT EXISTS `auth_rule` (
 -- Структура таблицы `category`
 --
 
-CREATE TABLE IF NOT EXISTS `category` (
+CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `picture` varchar(255) DEFAULT NULL,
   `picture_alt` varchar(255) DEFAULT NULL,
   `picture_title` varchar(255) DEFAULT NULL,
-  `meta_title` varchar(255) DEFAULT NULL,
-  `meta_description` text,
   `status` int(11) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `category`
 --
 
-INSERT INTO `category` (`id`, `name`, `description`, `picture`, `picture_alt`, `picture_title`, `meta_title`, `meta_description`, `status`, `created_at`) VALUES
-(1, 'Бургеры', '<p><strong>Очень вкусные бургеры</strong></p>\r\n', '/backend/web/storage/category_images/5a7c02354bd63.jpg', NULL, NULL, 'Мета заголовок', 'Мета описание', 1, '2018-02-07 12:57:47'),
-(2, 'Гриль', '<p>Очень вкусно!</p>\r\n', '/backend/web/storage/category_images/5a7c02401e40e.jpeg', NULL, NULL, '', '', 1, '2018-02-08 07:49:33'),
-(3, 'Салаты', '<p>Вкусные салаты</p>\r\n', '/backend/web/storage/category_images/5a7c024d0c725.jpg', NULL, NULL, '', '', 1, '2018-02-08 07:50:00'),
-(4, 'Супы', '<p>Вкусные супы</p>\r\n', '/backend/web/storage/category_images/5a7c026b03eaf.jpg', NULL, NULL, '', '', 1, '2018-02-08 07:50:17'),
-(5, 'Десерты', '<p>Вкусные десерты</p>\r\n', '/backend/web/storage/category_images/5a7c028195765.jpg', NULL, NULL, '', '', 1, '2018-02-08 07:51:10'),
-(6, 'Напитки', '<p>Вкусные напитки</p>\r\n', '/backend/web/storage/category_images/5a7c028bacc22.jpg', '', '', '', '', 1, '2018-02-08 07:51:26');
+INSERT INTO `category` (`id`, `name`, `description`, `picture`, `picture_alt`, `picture_title`, `status`, `created_at`) VALUES
+(14, 'Напитки', '<p><strong>Вкусные напитки.</strong></p>\r\n', '/backend/web/storage/category_images/5a89c61d0c611.jpg', '', '', 1, '2018-02-18 18:29:49'),
+(15, 'Десерты', '<p>Вкусные десерты.</p>\r\n', '/backend/web/storage/category_images/5a89c63546b60.jpg', '', '', 1, '2018-02-18 18:30:13'),
+(16, 'Супы', '<p>Вкусные супы.</p>\r\n', '/backend/web/storage/category_images/5a89c6485866c.jpg', '', '', 1, '2018-02-18 18:30:32'),
+(17, 'Салаты', '<p>Вкусные салаты.</p>\r\n', '/backend/web/storage/category_images/5a89c659a8fa8.jpg', '', '', 1, '2018-02-18 18:30:49'),
+(18, 'Гриль', '<p>Вкусный гриль.</p>\r\n', '/backend/web/storage/category_images/5a89c66e74e1e.jpg', '', '', 1, '2018-02-18 18:31:10'),
+(19, 'Бургеры', '<p>Вкусные бургеры.</p>\r\n', '/backend/web/storage/category_images/5a89c67faaf01.jpg', '', '', 1, '2018-02-18 18:31:27');
 
 -- --------------------------------------------------------
 
@@ -169,11 +169,11 @@ INSERT INTO `category` (`id`, `name`, `description`, `picture`, `picture_alt`, `
 -- Структура таблицы `city_area`
 --
 
-CREATE TABLE IF NOT EXISTS `city_area` (
+CREATE TABLE `city_area` (
   `id` int(11) NOT NULL,
   `region` varchar(255) NOT NULL,
   `delivery_price` decimal(10,2) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `city_area`
@@ -191,16 +191,55 @@ INSERT INTO `city_area` (`id`, `region`, `delivery_price`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `page_seo`
+--
+
+CREATE TABLE `page_seo` (
+  `id` int(11) NOT NULL,
+  `title_page` varchar(255) DEFAULT NULL,
+  `meta_title` varchar(255) DEFAULT NULL,
+  `meta_description` text,
+  `og_title` varchar(255) DEFAULT NULL,
+  `og_description` text,
+  `og_image` varchar(255) DEFAULT NULL,
+  `twitter_card` varchar(255) DEFAULT NULL,
+  `twitter_title` varchar(255) DEFAULT NULL,
+  `twitter_description` text,
+  `twitter_image` varchar(255) DEFAULT NULL,
+  `twitter_image_alt` varchar(255) DEFAULT NULL,
+  `page_priority` varchar(10) DEFAULT NULL,
+  `update_frequency` varchar(255) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `page_seo`
+--
+
+INSERT INTO `page_seo` (`id`, `title_page`, `meta_title`, `meta_description`, `og_title`, `og_description`, `og_image`, `twitter_card`, `twitter_title`, `twitter_description`, `twitter_image`, `twitter_image_alt`, `page_priority`, `update_frequency`, `product_id`, `category_id`) VALUES
+(1, 'Main page', 'dsfg', 'sdfg', 'sdfg', 'dsfg', '/backend/web/storage/seo_images/5a89c33c58475.jpg', 'sdfg', 'sdfg', 'sdfg', '/backend/web/storage/seo_images/5a89c33c58a3c.jpg', 'image_alt', '1', 'week', NULL, NULL),
+(10, '', '', '', '', '', NULL, '', '', '', NULL, '', '', '', NULL, 14),
+(11, '', '', '', '', '', NULL, '', '', '', NULL, '', '', '', NULL, 15),
+(12, '', '', '', '', '', NULL, '', '', '', NULL, '', '', '', NULL, 16),
+(13, '', '', '', '', '', NULL, '', '', '', NULL, '', '', '', NULL, 17),
+(14, '', '', '', '', '', NULL, '', '', '', NULL, '', '', '', NULL, 18),
+(15, '', '', '', '', '', NULL, '', '', '', NULL, '', '', '', NULL, 19),
+(16, '', '', '', '', '', NULL, '', '', '', NULL, '', '', '', 3, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `payment_system`
 --
 
-CREATE TABLE IF NOT EXISTS `payment_system` (
+CREATE TABLE `payment_system` (
   `id` int(11) NOT NULL,
   `public_key` text NOT NULL,
   `private_key` text NOT NULL,
   `payment_name` varchar(255) NOT NULL,
   `sandbox` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `payment_system`
@@ -215,11 +254,11 @@ INSERT INTO `payment_system` (`id`, `public_key`, `private_key`, `payment_name`,
 -- Структура таблицы `phones`
 --
 
-CREATE TABLE IF NOT EXISTS `phones` (
+CREATE TABLE `phones` (
   `id` int(11) NOT NULL,
   `phone` varchar(50) NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `phones`
@@ -236,7 +275,7 @@ INSERT INTO `phones` (`id`, `phone`, `created_at`) VALUES
 -- Структура таблицы `products`
 --
 
-CREATE TABLE IF NOT EXISTS `products` (
+CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
@@ -247,18 +286,16 @@ CREATE TABLE IF NOT EXISTS `products` (
   `picture_title` varchar(255) DEFAULT NULL,
   `price` decimal(10,2) NOT NULL,
   `discount_price` decimal(10,2) DEFAULT NULL,
-  `meta_title` varchar(255) DEFAULT NULL,
-  `meta_description` text,
   `status` int(11) DEFAULT '1',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `products`
 --
 
-INSERT INTO `products` (`id`, `category_id`, `title`, `description`, `composition`, `picture`, `picture_alt`, `picture_title`, `price`, `discount_price`, `meta_title`, `meta_description`, `status`, `created_at`) VALUES
-(1, 1, 'Сочный бургер', '<p><strong>Супер бургер!</strong></p>\r\n', '<p>Состоит из:</p>\r\n\r\n<ol>\r\n	<li>Мяса</li>\r\n	<li>булки</li>\r\n</ol>\r\n', '/backend/web/storage/product_images/5a7c1920c7301.jpg', '', '', '115.50', '78.99', 'Test meta', 'Test meta description', 1, '2018-02-08 09:32:16');
+INSERT INTO `products` (`id`, `category_id`, `title`, `description`, `composition`, `picture`, `picture_alt`, `picture_title`, `price`, `discount_price`, `status`, `created_at`) VALUES
+(3, 19, 'Бургер', '<p>Сочный бургер.</p>\r\n', '<p>Состоит из мяса</p>\r\n', '/backend/web/storage/product_images/5a89c70d6736b.png', '', '', '89.50', '75.99', 1, '2018-02-18 18:33:49');
 
 -- --------------------------------------------------------
 
@@ -266,14 +303,14 @@ INSERT INTO `products` (`id`, `category_id`, `title`, `description`, `compositio
 -- Структура таблицы `profile`
 --
 
-CREATE TABLE IF NOT EXISTS `profile` (
+CREATE TABLE `profile` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `surname` varchar(255) NOT NULL,
   `avatar` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `profile`
@@ -290,19 +327,19 @@ INSERT INTO `profile` (`id`, `name`, `surname`, `avatar`, `created_at`, `user_id
 -- Структура таблицы `recommend_products`
 --
 
-CREATE TABLE IF NOT EXISTS `recommend_products` (
+CREATE TABLE `recommend_products` (
   `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `status` int(11) DEFAULT '1',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `recommend_products`
 --
 
 INSERT INTO `recommend_products` (`id`, `product_id`, `status`, `created_at`) VALUES
-(5, 1, 0, '2018-02-17 12:44:23');
+(6, 3, 0, '2018-02-18 18:34:16');
 
 -- --------------------------------------------------------
 
@@ -310,7 +347,7 @@ INSERT INTO `recommend_products` (`id`, `product_id`, `status`, `created_at`) VA
 -- Структура таблицы `site_settings`
 --
 
-CREATE TABLE IF NOT EXISTS `site_settings` (
+CREATE TABLE `site_settings` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `contact_email` varchar(255) NOT NULL,
@@ -326,18 +363,15 @@ CREATE TABLE IF NOT EXISTS `site_settings` (
   `instagram_status` int(11) DEFAULT '1',
   `main_address` text NOT NULL,
   `latitude` varchar(255) DEFAULT NULL,
-  `longitude` varchar(255) DEFAULT NULL,
-  `page_title` varchar(255) DEFAULT NULL,
-  `meta_title` varchar(255) DEFAULT NULL,
-  `meta_description` text
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `longitude` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `site_settings`
 --
 
-INSERT INTO `site_settings` (`id`, `name`, `contact_email`, `logo`, `logo_alt`, `logo_title`, `time_from`, `time_to`, `score`, `facebook_url`, `instagram_url`, `facebook_status`, `instagram_status`, `main_address`, `latitude`, `longitude`, `page_title`, `meta_title`, `meta_description`) VALUES
-(1, 'BBQ delivery', 'vasya@gmail.com', '/backend/web/storage/site_logo/5a856fe254585.jpg', 'logo', 'bbq', '08:00', '20:00', 50, 'https://www.facebook.com/', 'https://www.instagram.com/?hl=ru', 1, 0, 'улица Патриотическая, 17, Запорожье, Запорожская область, Украина', '47.8485804', '35.11274419999995', 'BBQ', 'BBQ Запорожье', 'Лучшая доставка в городе!');
+INSERT INTO `site_settings` (`id`, `name`, `contact_email`, `logo`, `logo_alt`, `logo_title`, `time_from`, `time_to`, `score`, `facebook_url`, `instagram_url`, `facebook_status`, `instagram_status`, `main_address`, `latitude`, `longitude`) VALUES
+(1, 'BBQ delivery', 'vasya@gmail.com', '/backend/web/storage/site_logo/5a856fe254585.jpg', 'logo', 'bbq', '08:00', '20:00', 50, 'https://www.facebook.com/', 'https://www.instagram.com/?hl=ru', 1, 0, 'улица Патриотическая, 17, Запорожье, Запорожская область, Украина', '47.8485804', '35.11274419999995');
 
 -- --------------------------------------------------------
 
@@ -345,7 +379,7 @@ INSERT INTO `site_settings` (`id`, `name`, `contact_email`, `logo`, `logo_alt`, 
 -- Структура таблицы `user`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `auth_key` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
@@ -355,7 +389,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `status` smallint(6) NOT NULL DEFAULT '10',
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Дамп данных таблицы `user`
@@ -417,6 +451,14 @@ ALTER TABLE `city_area`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `page_seo`
+--
+ALTER TABLE `page_seo`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `page_seo_ibfk_1` (`product_id`),
+  ADD KEY `page_seo_ibfk_2` (`category_id`);
+
+--
 -- Индексы таблицы `payment_system`
 --
 ALTER TABLE `payment_system`
@@ -472,52 +514,57 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT для таблицы `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT для таблицы `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT для таблицы `city_area`
 --
 ALTER TABLE `city_area`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT для таблицы `page_seo`
+--
+ALTER TABLE `page_seo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT для таблицы `payment_system`
 --
 ALTER TABLE `payment_system`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT для таблицы `phones`
 --
 ALTER TABLE `phones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT для таблицы `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT для таблицы `recommend_products`
 --
 ALTER TABLE `recommend_products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT для таблицы `site_settings`
 --
 ALTER TABLE `site_settings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
@@ -542,6 +589,13 @@ ALTER TABLE `auth_item_child`
   ADD CONSTRAINT `auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Ограничения внешнего ключа таблицы `page_seo`
+--
+ALTER TABLE `page_seo`
+  ADD CONSTRAINT `page_seo_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `page_seo_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE;
+
+--
 -- Ограничения внешнего ключа таблицы `products`
 --
 ALTER TABLE `products`
@@ -558,6 +612,7 @@ ALTER TABLE `profile`
 --
 ALTER TABLE `recommend_products`
   ADD CONSTRAINT `recommend_products_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

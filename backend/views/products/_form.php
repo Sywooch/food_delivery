@@ -111,10 +111,6 @@ use dosamigos\ckeditor\CKEditor;
                             </div>
                         </div>
 
-                        <?= $form->field($model, 'meta_title')->textInput(['class' => 'form-control', 'placeholder' => 'Заголовок']) ?>
-
-                        <?= $form->field($model, 'meta_description')->textarea(['class' => 'form-control', 'rows' => 2, 'cols' => 5, 'placeholder' => 'Описание']) ?>
-
                         <?= $form->field($model, 'composition')->widget(CKEditor::className(), [
                             'preset' => 'full'
                         ]) ?>
@@ -122,6 +118,85 @@ use dosamigos\ckeditor\CKEditor;
                     </fieldset>
                 </div>
             </div>
+
+            <fieldset>
+                <legend class="text-semibold">
+                    <i class="icon-file-empty position-left"></i>
+                    Мета данные
+                    <a class="control-arrow" data-toggle="collapse" data-target="#demo2">
+                        <i class="icon-circle-down2"></i>
+                    </a>
+                </legend>
+
+                <div class="collapse in" id="demo2">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <?= $form->field($seo, 'title_page')->textInput(['class' => 'form-control']) ?>
+
+                            <?= $form->field($seo, 'meta_title')->textInput(['class' => 'form-control']) ?>
+
+                            <?= $form->field($seo, 'meta_description')->textarea(['class' => 'form-control']) ?>
+
+                            <?= $form->field($seo, 'og_title')->textInput(['class' => 'form-control']) ?>
+
+                            <?= $form->field($seo, 'og_description')->textarea(['class' => 'form-control']) ?>
+
+                            <label class="control-label">og:image</label>
+                            <div class="media no-margin-top">
+                                <div class="media-left">
+                                    <a href="#"><img src="<?= !empty($seo->og_image) ? $seo->og_image : '/backend/web/images/placeholder.jpg' ?>" style="width: 58px; height: 58px; border-radius: 2px;" alt=""></a>
+                                </div>
+
+                                <div class="media-body">
+                                    <div class="uploader">
+                                        <?= $form->field($seo, 'facebook_image')->fileInput(['class' => 'file-styled'])->label(false) ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <?= $form->field($seo, 'twitter_card')->textInput(['class' => 'form-control']) ?>
+
+                            <?= $form->field($seo, 'twitter_title')->textInput(['class' => 'form-control']) ?>
+
+                            <?= $form->field($seo, 'twitter_description')->textarea(['class' => 'form-control']) ?>
+
+                            <label class="control-label">twitter:image</label>
+                            <div class="media no-margin-top">
+                                <div class="media-left">
+                                    <a href="#"><img src="<?= !empty($seo->twitter_image) ? $seo->twitter_image : '/backend/web/images/placeholder.jpg' ?>" style="width: 58px; height: 58px; border-radius: 2px;" alt=""></a>
+                                </div>
+
+                                <div class="media-body">
+                                    <div class="uploader">
+                                        <?= $form->field($seo, 'twitter_image_upload')->fileInput(['class' => 'file-styled'])->label(false) ?>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <?= $form->field($seo, 'twitter_image_alt')->textInput(['class' => 'form-control']) ?>
+
+                            <?= $form->field($seo, 'page_priority')->dropDownList([
+                                '0.4' => '0.4',
+                                '0.6' => '0.6',
+                                '0.8' => '0.8',
+                                '1' => '1'
+                            ],
+                                ['prompt' => 'Выберите приоритет страницы', 'class' => 'select'])
+                            ?>
+
+                            <?= $form->field($seo, 'update_frequency')->dropDownList([
+                                'day' => 'Ежедневно',
+                                'week' => 'Еженедельно',
+                                'month' => 'Ежемесячно'
+                            ],
+                                ['prompt' => 'Выберите частоту обновления', 'class' => 'select'])
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
 
             <div class="text-right">
                 <button type="submit" class="btn btn-primary"><?= $model->isNewRecord ? 'Добавить' : 'Сохранить' ?> <i class="icon-arrow-right14 position-right"></i></button>

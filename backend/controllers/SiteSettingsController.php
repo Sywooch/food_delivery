@@ -9,6 +9,7 @@ use common\models\PaymentSystem;
 use common\models\SiteSettings;
 use common\models\Addresses;
 use common\models\Phones;
+use common\models\PageSeo;
 
 class SiteSettingsController extends Controller
 {
@@ -17,6 +18,7 @@ class SiteSettingsController extends Controller
     public function actionIndex()
     {
         $model = SiteSettings::findOne(1);
+        $seo = PageSeo::findOne(1);
 
         if($model->load(Yii::$app->request->post()) && $model->save()) {
             $model->site_logo = UploadedFile::getInstance($model, 'site_logo');
@@ -36,8 +38,40 @@ class SiteSettingsController extends Controller
             Yii::$app->session->setFlash('success', 'Изменения успешно сохранены!');
         }
 
+        if($seo->load(Yii::$app->request->post()) && $seo->save()){
+            $seo->facebook_image = UploadedFile::getInstance($seo, 'facebook_image');
+            $seo->twitter_image_upload = UploadedFile::getInstance($seo, 'twitter_image_upload');
+
+            if($seo->facebook_image){
+                if(!empty($seo->og_image)) {
+                    $picture = explode('/backend/web' ,$seo->og_image);
+                    unlink(getcwd().''.$picture[1]);
+                }
+
+                $imageName = uniqid();
+                $seo->facebook_image->saveAs('storage/seo_images/'.$imageName.'.'.$seo->facebook_image->extension);
+                $seo->og_image = '/backend/web/storage/seo_images/'.$imageName.'.'.$seo->facebook_image->extension;
+                $seo->save(false);
+            }
+
+            if($seo->twitter_image_upload){
+                if(!empty($seo->twitter_image)) {
+                    $picture = explode('/backend/web' ,$seo->twitter_image);
+                    unlink(getcwd().''.$picture[1]);
+                }
+
+                $imageName = uniqid();
+                $seo->twitter_image_upload->saveAs('storage/seo_images/'.$imageName.'.'.$seo->twitter_image_upload->extension);
+                $seo->twitter_image = '/backend/web/storage/seo_images/'.$imageName.'.'.$seo->twitter_image_upload->extension;
+                $seo->save(false);
+            }
+
+            Yii::$app->session->setFlash('success', 'SEO настройки успешно сохранены!');
+        }
+
         return $this->render('index', [
-            'model' => $model
+            'model' => $model,
+            'seo' => $seo
         ]);
     }
 

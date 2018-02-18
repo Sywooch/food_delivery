@@ -76,14 +76,6 @@ $this->title = 'Продукты';
             'value' => 'description'
         ],
         [
-            'header' => 'Мета заголовок',
-            'value' => 'meta_title'
-        ],
-        [
-            'header' => 'Мета описание',
-            'value' => 'meta_description'
-        ],
-        [
             'header' => 'Статус',
             'format' => 'raw',
             'value' => function($model) {

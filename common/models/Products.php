@@ -22,8 +22,8 @@ class Products extends ActiveRecord
             [['title', 'description', 'composition', 'price', 'category_id'], 'required'],
             [['category_id', 'status'], 'integer'],
             [['price', 'discount_price'], 'number'],
-            [['title', 'meta_title', 'picture_alt', 'picture_title'], 'string', 'max' => 255],
-            [['description', 'composition', 'meta_description'], 'string'],
+            [['title', 'picture_alt', 'picture_title'], 'string', 'max' => 255],
+            [['description', 'composition'], 'string'],
             [['image'], 'file', 'extensions' => 'png, jpg, jpeg']
         ];
     }
@@ -37,8 +37,6 @@ class Products extends ActiveRecord
             'composition' => 'Состав продукта',
             'price' => 'Цена',
             'discount_price' => 'Акционная цена',
-            'meta_title' => 'Мета заголовок',
-            'meta_description' => 'Мета описание',
             'image' => 'Фото категории',
             'status' => 'Статус',
             'picture_alt' => 'Alt изображения',

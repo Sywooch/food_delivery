@@ -21,8 +21,8 @@ class Category extends ActiveRecord
         return [
             [['name', 'description', 'status'], 'required'],
             [['status'], 'integer'],
-            [['name', 'meta_title', 'picture_alt', 'picture_title'], 'string', 'max' => 255],
-            [['description', 'meta_description'], 'string'],
+            [['name', 'picture_alt', 'picture_title'], 'string', 'max' => 255],
+            [['description'], 'string'],
             [['image'], 'file', 'extensions' => 'png, jpg, jpeg']
         ];
     }
@@ -32,8 +32,6 @@ class Category extends ActiveRecord
         return [
             'name' => 'Категория',
             'description' => 'Описание',
-            'meta_title' => 'Мета заголовок',
-            'meta_description' => 'Мета описание',
             'image' => 'Фото категории',
             'status' => 'Статус',
             'picture_alt' => 'Alt изображения',
