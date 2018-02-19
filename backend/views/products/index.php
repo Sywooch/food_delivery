@@ -8,24 +8,34 @@ $this->title = 'Продукты';
 
 ?>
 
-<?= Html::a('
-    <button type="button" class="btn bg-teal-400 btn-labeled legitRipple">
-        <b><i class="icon-plus3"></i></b>
-        Новый продукт
-    </button>
-', ['create']) ?>
-
-<?php $form = ActiveForm::begin(['options' => ['data-pjax' => true ], 'method' => 'get', 'action' => ['index']]); ?>
-    <div class="form-group has-feedback has-feedback-left" style="max-width: 300px; float: right">
-        <input class="form-control ui-autocomplete-input" name="ProductsSearch[search]" placeholder="Поиск" id="ac-basic" autocomplete="off" type="text">
-        <div class="form-control-feedback">
-            <i class="icon-search4 text-size-base"></i>
-        </div>
+<div class="row">
+    <div class="col-md-6">
+        <?php $form = ActiveForm::begin(['options' => ['data-pjax' => true ], 'method' => 'get', 'action' => ['index']]); ?>
+            <div class="form-group has-feedback has-feedback-left" style="max-width: 300px;">
+                <input class="form-control ui-autocomplete-input" name="ProductsSearch[search]" placeholder="Поиск" id="ac-basic" autocomplete="off" type="text">
+                <div class="form-control-feedback">
+                    <i class="icon-search4 text-size-base"></i>
+                </div>
+            </div>
+        <?php ActiveForm::end() ?>
     </div>
-<?php ActiveForm::end() ?>
+    <div class="col-md-6">
+        <?= Html::a('
+            <button type="button" class="btn bg-teal-400 btn-labeled legitRipple">
+                <b><i class="icon-plus3"></i></b>
+                Новый продукт
+            </button>
+        ', ['create'], [
+                'style' => [
+                        'float' => 'right'
+                ]
+        ]) ?>
+    </div>
+</div>
 
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
+    'layout'=>"{items}\n{pager}\n{summary}",
     'columns' => [
         [
             'class' => 'yii\grid\SerialColumn',
@@ -64,16 +74,6 @@ $this->title = 'Продукты';
         [
             'header' => 'Категория',
             'value' => 'category.name'
-        ],
-        [
-            'header' => 'Описание',
-            'format' => 'raw',
-            'value' => 'description'
-        ],
-        [
-            'header' => 'Состав',
-            'format' => 'raw',
-            'value' => 'description'
         ],
         [
             'header' => 'Статус',

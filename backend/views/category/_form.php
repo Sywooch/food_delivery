@@ -7,7 +7,6 @@ use dosamigos\ckeditor\CKEditor;
 <?php $form = ActiveForm::begin(['id' => 'category-form']); ?>
     <div class="panel panel-flat">
         <div class="panel-heading">
-            <h5 class="panel-title">Категория</h5>
             <div class="heading-elements">
                 <ul class="icons-list">
                     <li><a data-action="collapse"></a></li>
@@ -37,15 +36,12 @@ use dosamigos\ckeditor\CKEditor;
                         <div class="form-group">
                             <label class="display-block">Статус:</label>
 
-                            <label class="radio-inline">
-                                <input type="radio" name="Category[status]" value="1" class="styled" checked="checked">
-                                Опубликована
-                            </label>
-
-                            <label class="radio-inline">
-                                <input type="radio" name="Category[status]" value="0" class="styled">
-                                Скрыта
-                            </label>
+                            <div class="checkbox checkbox-right checkbox-switchery">
+                                <label>
+                                    <input type="checkbox" class="switchery" name="Category[status]" value="0">
+                                    Скрыть категорию
+                                </label>
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -56,15 +52,20 @@ use dosamigos\ckeditor\CKEditor;
                         <div class="form-group">
                             <label class="display-block">Статус:</label>
 
-                            <label class="radio-inline">
-                                <input type="radio" name="Category[status]" value="1" class="styled" <?= $model->status == 1 ? 'checked="checked"' : '' ?>>
-                                Опубликована
-                            </label>
+                            <div class="checkbox checkbox-right checkbox-switchery">
+                                <?php if($model->status == 1): ?>
+                                    <label>
+                                        <input type="checkbox" class="switchery" name="Category[status]" value="0">
+                                        Скрыть категорию
+                                    </label>
+                                <?php else: ?>
+                                    <label>
+                                        <input type="checkbox" class="switchery" name="Category[status]" value="1">
+                                        Отображать категорию
+                                    </label>
+                                <?php endif;?>
+                            </div>
 
-                            <label class="radio-inline">
-                                <input type="radio" name="Category[status]" value="0" class="styled" <?= $model->status == 0 ? 'checked="checked"' : '' ?>>
-                                Скрыта
-                            </label>
                         </div>
 
                         <div class="media no-margin-top">

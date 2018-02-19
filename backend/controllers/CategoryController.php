@@ -119,7 +119,7 @@ class CategoryController extends Controller
                 }
             }
 
-            Yii::$app->session->setFlash('warning', 'Изменения успешно сохранены!');
+            Yii::$app->session->setFlash('success', 'Изменения успешно сохранены!');
 
             return $this->redirect('index');
         }

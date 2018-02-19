@@ -11,7 +11,7 @@ $this->title = 'Адреса и телефоны';
 <div class="row">
     <div class="col-md-6">
         <?= Html::a('
-            <button type="button" class="btn bg-teal-400 btn-labeled legitRipple">
+            <button type="button" class="btn bg-teal-400 btn-labeled legitRipple" style="margin-bottom: 3%">
                 <b><i class="icon-plus3"></i></b>
                 Новый адрес
             </button>
@@ -20,6 +20,7 @@ $this->title = 'Адреса и телефоны';
 
         <?= GridView::widget([
             'dataProvider' => $addressDataProvider,
+            'layout'=>"{items}\n{pager}\n{summary}",
             'columns' => [
                 [
                     'class' => 'yii\grid\SerialColumn',
@@ -55,7 +56,7 @@ $this->title = 'Адреса и телефоны';
 
     <div class="col-md-6">
         <?= Html::a('
-            <button type="button" class="btn bg-teal-400 btn-labeled legitRipple">
+            <button type="button" class="btn bg-teal-400 btn-labeled legitRipple" style="margin-bottom: 3%">
                 <b><i class="icon-plus3"></i></b>
                 Новый телефон
             </button>
@@ -64,6 +65,7 @@ $this->title = 'Адреса и телефоны';
 
         <?= GridView::widget([
             'dataProvider' => $phoneDataProvider,
+            'layout'=>"{items}\n{pager}\n{summary}",
             'columns' => [
                 [
                     'class' => 'yii\grid\SerialColumn',

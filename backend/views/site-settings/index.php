@@ -78,15 +78,19 @@ $this->title = 'Настройки сайта';
                                 <div class="form-group">
                                     <label class="display-block">Facebook:</label>
 
-                                    <label class="radio-inline">
-                                        <input type="radio" name="SiteSettings[facebook_status]" value="1" class="styled" <?= $model->facebook_status == 1 ? 'checked="checked"' : '' ?>>
-                                        Отображать
-                                    </label>
-
-                                    <label class="radio-inline">
-                                        <input type="radio" name="SiteSettings[facebook_status]" value="0" class="styled" <?= $model->facebook_status == 0 ? 'checked="checked"' : '' ?>>
-                                        Скрыть
-                                    </label>
+                                    <div class="checkbox checkbox-right checkbox-switchery">
+                                        <?php if($model->facebook_status == 1): ?>
+                                            <label>
+                                                <input type="checkbox" class="switchery" name="SiteSettings[facebook_status]" value="0">
+                                                Скрыть
+                                            </label>
+                                        <?php else: ?>
+                                            <label>
+                                                <input type="checkbox" class="switchery" name="SiteSettings[facebook_status]" value="1">
+                                                Отображать
+                                            </label>
+                                        <?php endif;?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -99,15 +103,29 @@ $this->title = 'Настройки сайта';
                                 <div class="form-group">
                                     <label class="display-block">Instagram:</label>
 
-                                    <label class="radio-inline">
-                                        <input type="radio" name="SiteSettings[instagram_status]" value="1" class="styled" <?= $model->instagram_status == 1 ? 'checked="checked"' : '' ?>>
-                                        Отображать
-                                    </label>
+                                    <div class="checkbox checkbox-right checkbox-switchery">
+                                        <?php if($model->instagram_status == 1): ?>
+                                            <label>
+                                                <input type="checkbox" class="switchery" name="SiteSettings[instagram_status]" value="0">
+                                                Скрыть
+                                            </label>
+                                        <?php else: ?>
+                                            <label>
+                                                <input type="checkbox" class="switchery" name="SiteSettings[instagram_status]" value="1">
+                                                Отображать
+                                            </label>
+                                        <?php endif;?>
+                                    </div>
 
-                                    <label class="radio-inline">
-                                        <input type="radio" name="SiteSettings[instagram_status]" value="0" class="styled" <?= $model->instagram_status == 0 ? 'checked="checked"' : '' ?>>
-                                        Скрыть
-                                    </label>
+<!--                                    <label class="radio-inline">-->
+<!--                                        <input type="radio" name="SiteSettings[instagram_status]" value="1" class="styled" --><?//= $model->instagram_status == 1 ? 'checked="checked"' : '' ?><!-->
+<!--                                        Отображать-->
+<!--                                    </label>-->
+<!--
+<!--                                    <label class="radio-inline">-->
+<!--                                        <input type="radio" name="SiteSettings[instagram_status]" value="0" class="styled" --><?//= $model->instagram_status == 0 ? 'checked="checked"' : '' ?><!-->
+<!--                                        Скрыть-->
+<!--                                    </label>-->
                                 </div>
                             </div>
                         </div>

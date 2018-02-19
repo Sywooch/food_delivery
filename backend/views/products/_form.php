@@ -34,34 +34,46 @@ use dosamigos\ckeditor\CKEditor;
                             <div class="form-group">
                                 <label class="display-block">Статус:</label>
 
-                                <label class="radio-inline">
-                                    <input type="radio" name="Products[status]" value="1" class="styled" checked="checked">
-                                    Опубликован
-                                </label>
+                                <div class="checkbox checkbox-right checkbox-switchery">
+                                    <label>
+                                        <input type="checkbox" class="switchery" name="Products[status]" value="0">
+                                        Скрыть продукт
+                                    </label>
+                                </div>
 
-                                <label class="radio-inline">
-                                    <input type="radio" name="Products[status]" value="0" class="styled">
-                                    Скрыт
-                                </label>
                             </div>
 
                             <div class="form-group">
                                 <label class="display-block">Фото продукта:</label>
                                 <?= $form->field($model, 'image')->fileInput(['class' => 'file-styled'])->label(false) ?>
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <?= $form->field($model, 'picture_alt')->textInput(['class' => 'form-control', 'placeholder' => 'Alt']) ?>
+                                </div>
+                                <div class="col-md-6">
+                                    <?= $form->field($model, 'picture_title')->textInput(['class' => 'form-control', 'placeholder' => 'Title']) ?>
+                                </div>
+                            </div>
                         <?php else: ?>
                             <div class="form-group">
                                 <label class="display-block">Статус:</label>
 
-                                <label class="radio-inline">
-                                    <input type="radio" name="Products[status]" value="1" class="styled" <?= $model->status == 1 ? 'checked="checked"' : '' ?>>
-                                    Опубликован
-                                </label>
+                                <div class="checkbox checkbox-right checkbox-switchery">
+                                    <?php if($model->status == 1): ?>
+                                        <label>
+                                            <input type="checkbox" class="switchery" name="Products[status]" value="0">
+                                            Скрыть продукт
+                                        </label>
+                                    <?php else: ?>
+                                        <label>
+                                            <input type="checkbox" class="switchery" name="Products[status]" value="1">
+                                            Отображать продукт
+                                        </label>
+                                    <?php endif;?>
+                                </div>
 
-                                <label class="radio-inline">
-                                    <input type="radio" name="Products[status]" value="0" class="styled" <?= $model->status == 0 ? 'checked="checked"' : '' ?>>
-                                    Скрыт
-                                </label>
                             </div>
 
                             <div class="media no-margin-top">
@@ -73,6 +85,15 @@ use dosamigos\ckeditor\CKEditor;
                                     <div class="uploader">
                                         <?= $form->field($model, 'image')->fileInput(['class' => 'file-styled'])->label(false) ?>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <?= $form->field($model, 'picture_alt')->textInput(['class' => 'form-control', 'placeholder' => 'Alt']) ?>
+                                </div>
+                                <div class="col-md-6">
+                                    <?= $form->field($model, 'picture_title')->textInput(['class' => 'form-control', 'placeholder' => 'Title']) ?>
                                 </div>
                             </div>
                         <?php endif; ?>
@@ -99,15 +120,6 @@ use dosamigos\ckeditor\CKEditor;
                             </div>
                             <div class="col-md-6">
                                 <?= $form->field($model, 'discount_price')->textInput(['class' => 'form-control', 'placeholder' => 'Акционная цена продукта']) ?>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <?= $form->field($model, 'picture_alt')->textInput(['class' => 'form-control', 'placeholder' => 'Alt']) ?>
-                            </div>
-                            <div class="col-md-6">
-                                <?= $form->field($model, 'picture_title')->textInput(['class' => 'form-control', 'placeholder' => 'Title']) ?>
                             </div>
                         </div>
 

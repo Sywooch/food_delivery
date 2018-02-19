@@ -32,6 +32,9 @@ class AppAsset extends AssetBundle
         'js/plugins/pickers/pickadate/picker.date.js',
         'js/plugins/pickers/pickadate/picker.time.js',
         'js/pages/picker_date.js',
+
+        'js/plugins/forms/styling/switchery.min.js',
+        'js/pages/form_checkboxes_radios.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

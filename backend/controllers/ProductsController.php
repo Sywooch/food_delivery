@@ -39,7 +39,7 @@ class ProductsController extends Controller
 
             $seo->product_id = $model->id;
             $seo->save(false);
-            
+
             if($seo->load(Yii::$app->request->post()) && $seo->save()) {
                 $seo->facebook_image = UploadedFile::getInstance($seo, 'facebook_image');
                 $seo->twitter_image_upload = UploadedFile::getInstance($seo, 'twitter_image_upload');
@@ -119,7 +119,7 @@ class ProductsController extends Controller
                 }
             }
 
-            Yii::$app->session->setFlash('warning', 'Изменения успешно сохранены!');
+            Yii::$app->session->setFlash('success', 'Изменения успешно сохранены!');
 
             return $this->redirect('index');
         }

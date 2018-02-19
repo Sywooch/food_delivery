@@ -48,7 +48,20 @@ $this->title = 'Мой профиль';
 
                         <?= $form->field($model, 'username')->textInput(['class' => 'form-control', 'placeholder' => 'Логин']) ?>
 
-                        <?= $form->field($model, 'email')->textInput(['class' => 'form-control', 'placeholder' => 'email@gmail.com']) ?>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <?= $form->field($model, 'email')->textInput(['class' => 'form-control', 'placeholder' => 'someemail@mail.com']) ?>
+                            </div>
+
+                            <div class="col-md-6">
+                                <?= $form->field($profile, 'phone')->widget(\yii\widgets\MaskedInput::className(), [
+                                    'mask' => '+3 (999) 999 99 99',
+                                    'clientOptions'=>[
+                                        'clearIncomplete'=>true
+                                    ]
+                                ])->textInput() ?>
+                            </div>
+                        </div>
 
                     </fieldset>
                 </div>

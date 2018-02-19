@@ -59,7 +59,20 @@ $this->title = 'Добавление нового пользователя';
                             </div>
                         </div>
 
-                        <?= $form->field($model, 'email')->textInput(['class' => 'form-control', 'placeholder' => 'someemail@mail.com']) ?>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <?= $form->field($model, 'email')->textInput(['class' => 'form-control', 'placeholder' => 'someemail@mail.com']) ?>
+                            </div>
+
+                            <div class="col-md-6">
+                                <?= $form->field($model, 'phone')->widget(\yii\widgets\MaskedInput::className(), [
+                                    'mask' => '+3 (999) 999 99 99',
+                                    'clientOptions'=>[
+                                        'clearIncomplete'=>true
+                                    ]
+                                ])->textInput() ?>
+                            </div>
+                        </div>
 
                         <label class="display-block">Фото пользователя:</label>
                         <?= $form->field($model, 'photo')->fileInput(['class' => 'file-styled'])->label(false) ?>

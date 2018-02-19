@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 18 2018 г., 21:34
+-- Время создания: Фев 20 2018 г., 01:42
 -- Версия сервера: 5.7.19
 -- Версия PHP: 7.0.21
 
@@ -307,6 +307,7 @@ CREATE TABLE `profile` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `surname` varchar(255) NOT NULL,
+  `phone` varchar(255) DEFAULT NULL,
   `avatar` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL
@@ -316,10 +317,10 @@ CREATE TABLE `profile` (
 -- Дамп данных таблицы `profile`
 --
 
-INSERT INTO `profile` (`id`, `name`, `surname`, `avatar`, `created_at`, `user_id`) VALUES
-(1, 'Влад', 'Батькович', '/backend/web/storage/user_avatars/5a7ffaf410b8d.jpg', '2018-02-06 09:25:13', 1),
-(11, 'Name', 'Surname', '/backend/web/storage/user_avatars/5a7ad97187a94.jpg', '2018-02-07 09:49:18', 14),
-(18, 'Администратор', 'Администраторович', '/backend/web/storage/user_avatars/5a7f4fc58ab35.jpg', '2018-02-10 20:02:13', 21);
+INSERT INTO `profile` (`id`, `name`, `surname`, `phone`, `avatar`, `created_at`, `user_id`) VALUES
+(1, 'Влад', 'Батькович', '+3 (097) 678 94 51', '/backend/web/storage/user_avatars/5a7ffaf410b8d.jpg', '2018-02-06 09:25:13', 1),
+(11, 'Name', 'Surname', NULL, '/backend/web/storage/user_avatars/5a7ad97187a94.jpg', '2018-02-07 09:49:18', 14),
+(18, 'Администратор', 'Администраторович', '+3 (097) 867 36 31', '/backend/web/storage/user_avatars/5a7f4fc58ab35.jpg', '2018-02-10 20:02:13', 21);
 
 -- --------------------------------------------------------
 
@@ -371,7 +372,7 @@ CREATE TABLE `site_settings` (
 --
 
 INSERT INTO `site_settings` (`id`, `name`, `contact_email`, `logo`, `logo_alt`, `logo_title`, `time_from`, `time_to`, `score`, `facebook_url`, `instagram_url`, `facebook_status`, `instagram_status`, `main_address`, `latitude`, `longitude`) VALUES
-(1, 'BBQ delivery', 'vasya@gmail.com', '/backend/web/storage/site_logo/5a856fe254585.jpg', 'logo', 'bbq', '08:00', '20:00', 50, 'https://www.facebook.com/', 'https://www.instagram.com/?hl=ru', 1, 0, 'улица Патриотическая, 17, Запорожье, Запорожская область, Украина', '47.8485804', '35.11274419999995');
+(1, 'BBQ delivery', 'vasya@gmail.com', '/backend/web/storage/site_logo/5a856fe254585.jpg', 'logo', 'bbq', '08:00', '20:00', 50, 'https://www.facebook.com/', 'https://www.instagram.com/?hl=ru', 1, 1, 'улица Патриотическая, 17, Запорожье, Запорожская область, Украина', '47.8485804', '35.11274419999995');
 
 -- --------------------------------------------------------
 
@@ -519,7 +520,7 @@ ALTER TABLE `addresses`
 -- AUTO_INCREMENT для таблицы `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT для таблицы `city_area`
 --
@@ -529,7 +530,7 @@ ALTER TABLE `city_area`
 -- AUTO_INCREMENT для таблицы `page_seo`
 --
 ALTER TABLE `page_seo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT для таблицы `payment_system`
 --
@@ -544,7 +545,7 @@ ALTER TABLE `phones`
 -- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT для таблицы `profile`
 --

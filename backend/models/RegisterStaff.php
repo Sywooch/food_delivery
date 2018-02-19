@@ -17,6 +17,7 @@ class RegisterStaff extends Model
 
     public $name;
     public $surname;
+    public $phone;
     public $photo;
     
     public $role;
@@ -42,6 +43,8 @@ class RegisterStaff extends Model
             [['name', 'surname'], 'required'],
             [['name', 'surname'], 'string', 'max' => 255],
 
+            [['phone'], 'string', 'max' => 255],
+
             [['photo'], 'file', 'extensions' => 'png, jpg, jpeg'],
             
             ['role', 'string']
@@ -57,6 +60,7 @@ class RegisterStaff extends Model
             'name' => 'Имя',
             'surname' => 'Фамилия',
             'photo' => 'Фото пользователя',
+            'phone' => 'Телефон',
             'role' => 'Роль'
         ];
     }

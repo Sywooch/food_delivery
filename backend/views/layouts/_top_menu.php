@@ -1,9 +1,13 @@
 <?php
 use yii\helpers\Url;
+use common\models\SiteSettings;
+
+$settings = SiteSettings::findOne(1);
 ?>
 
 <div class="navbar-header">
-    <a class="navbar-brand" href="<?= Url::to(['/dashboard/index']) ?>"><img src="/backend/web/images/logo_light.png" alt=""></a>
+<!--    <a class="navbar-brand" href="--><?//= Url::to(['/dashboard/index']) ?><!--"><img src="/backend/web/images/logo_light.png" alt=""></a>-->
+    <a class="navbar-brand" href="<?= Url::to(['/dashboard/index']) ?>"><?= $settings->name ?></a>
 
     <ul class="nav navbar-nav visible-xs-block">
         <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>

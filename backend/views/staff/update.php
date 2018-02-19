@@ -8,7 +8,7 @@ $this->title = 'Редактирование пользователя';
 
 <div class="panel panel-flat">
     <div class="panel-heading">
-        <h5 class="panel-title">Информация пользователя <?= $profile->surname.' '.$profile->name ?></h5>
+        <h5 class="panel-title">Информация о пользователе</h5>
         <div class="heading-elements">
             <ul class="icons-list">
                 <li><a data-action="collapse"></a></li>
@@ -57,7 +57,20 @@ $this->title = 'Редактирование пользователя';
                         </div>
                     </div>
 
-                    <?= $form->field($user, 'email')->textInput(['class' => 'form-control', 'placeholder' => 'someemail@mail.com']) ?>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <?= $form->field($user, 'email')->textInput(['class' => 'form-control', 'placeholder' => 'someemail@mail.com']) ?>
+                        </div>
+
+                        <div class="col-md-6">
+                            <?= $form->field($profile, 'phone')->widget(\yii\widgets\MaskedInput::className(), [
+                                'mask' => '+3 (999) 999 99 99',
+                                'clientOptions'=>[
+                                    'clearIncomplete'=>true
+                                ]
+                            ])->textInput() ?>
+                        </div>
+                    </div>
 
                     <label class="text-semibold">Фото пользователя:</label>
                     <div class="media no-margin-top">

@@ -22,7 +22,7 @@ class Profile extends ActiveRecord
     {
         return [
             [['name', 'surname'], 'required'],
-            [['name', 'surname'], 'string', 'max' => 255],
+            [['name', 'surname', 'phone'], 'string', 'max' => 255],
             [['user_avatar'], 'file', 'extensions' => 'png, jpg, jpeg'],
         ];
     }
@@ -33,7 +33,8 @@ class Profile extends ActiveRecord
         return [
             'name' => 'Имя',
             'surname' => 'Фамилия',
-            'user_avatar' => 'Фото пользователя',
+            'phone' => 'Телефон',
+            'user_avatar' => 'Фото пользователя'
         ];
     }
 
