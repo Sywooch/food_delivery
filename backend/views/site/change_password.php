@@ -21,8 +21,6 @@ $this->title = 'Смена пароля';
 
         <div class="panel-body">
 
-            <?= $form->field($model, 'currentPassword')->passwordInput(['class' => 'form-control']) ?>
-
             <?= $form->field($model, 'newPassword')->passwordInput(['class' => 'form-control']) ?>
 
             <?= $form->field($model, 'newPasswordConfirm')->passwordInput(['class' => 'form-control']) ?>

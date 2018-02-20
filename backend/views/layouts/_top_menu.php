@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Url;
+use yii\helpers\Html;
 use common\models\SiteSettings;
 
 $settings = SiteSettings::findOne(1);
@@ -108,6 +109,57 @@ $settings = SiteSettings::findOne(1);
                     </ul>
                 </div>
             </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon-profile"></i>
+                </a>
+
+                <div class="dropdown-menu dropdown-content">
+                    <div class="dropdown-content-heading">
+                        Мой аккаунт (<?= Yii::$app->user->identity->role->item_name ?>)
+                    </div>
+
+                    <ul class="media-list dropdown-content-body width-350">
+                        <li class="media">
+                            <div class="media-left">
+                                <a href="#" class="btn bg-success-400 btn-rounded btn-icon btn-xs"><i class="icon-reading"></i></a>
+                            </div>
+
+                            <div class="media-body">
+                                <a href="<?= Url::to(['/site/profile']) ?>"><span>Мой профиль</span></a>
+                            </div>
+                        </li>
+
+                        <li class="media">
+                            <div class="media-left">
+                                <a href="#" class="btn bg-success-400 btn-rounded btn-icon btn-xs"><i class="icon-key"></i></a>
+                            </div>
+
+                            <div class="media-body">
+                                <a href="<?= Url::to(['/site/change-password']) ?>"><span>Смена пароля</span></a>
+                            </div>
+                        </li>
+
+                        <li class="media">
+                            <div class="media-left">
+                                <a href="#" class="btn bg-success-400 btn-rounded btn-icon btn-xs"><i class="icon-exit3"></i></a>
+                            </div>
+
+                            <div class="media-body">
+                                <?= Html::a('<span>Выход</span>',
+                                    ['/site/logout'],
+                                    [
+                                        'data' => [
+                                            'method' => 'post'
+                                        ]
+                                ]) ?>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
         </ul>
     </div>
 </div>

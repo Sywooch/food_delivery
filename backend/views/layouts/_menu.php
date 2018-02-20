@@ -11,27 +11,6 @@ use yii\helpers\Html;
                 <a class="legitRipple" href="#"><img src="<?= isset($profile) ? $profile->avatar : '/web/images/placeholder.jpg' ?>" class="img-circle img-responsive" alt="profile_image"></a>
                 <h6><?= isset($profile) ? $profile->surname.' '.$profile->name : 'Пользователь' ?></h6>
             </div>
-
-            <div class="sidebar-user-material-menu">
-                <a href="#user-nav" data-toggle="collapse" aria-expanded="true"><span>Мой аккаунт (<?= Yii::$app->user->identity->role->item_name ?>)</span> <i class="caret"></i></a>
-            </div>
-        </div>
-
-        <div class="navigation-wrapper collapse" id="user-nav">
-            <ul class="navigation">
-                <li><a href="<?= Url::to(['/site/profile']) ?>"><i class="icon-user-plus"></i> <span>Мой профиль</span></a></li>
-<!--                <li><a href="#"><i class="icon-comment-discussion"></i> <span><span class="badge bg-teal-400 pull-right">58</span> Messages</span></a></li>-->
-                <li><a href="<?= Url::to(['/site/change-password']) ?>"><i class="icon-key"></i> <span>Смена пароля</span></a></li>
-                <li>
-                    <?= Html::a('<i class="icon-switch2"></i> <span>Выход</span>',
-                    ['/site/logout'],
-                    [
-                        'data' => [
-                            'method' => 'post'
-                        ]
-                    ]) ?>
-                </li>
-            </ul>
         </div>
     </div>
 
